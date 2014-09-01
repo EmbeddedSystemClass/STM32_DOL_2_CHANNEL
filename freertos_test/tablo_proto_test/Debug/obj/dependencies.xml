@@ -439,10 +439,6 @@
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\timers.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\StackMacros.h"/>
       </source>
-      <source file="..\..\..\devices\encoder.c" lastModified="148311fbf13">
-         <include file="..\..\..\devices\encoder.h"/>
-         <include file="..\..\..\protocols\channels.h"/>
-      </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="14125d809a2">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
