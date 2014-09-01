@@ -59,11 +59,11 @@ void Encoder_Init(void)//инициализация таймера дола
 
 	    TIM_EncoderInterfaceConfig(TIM3, TIM_EncoderMode_TI12,TIM_ICPolarity_BothEdge, TIM_ICPolarity_BothEdge);
 	    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
-	    TIM_Cmd(TIM3, ENABLE);
+
 
 	    TIM_EncoderInterfaceConfig(TIM1, TIM_EncoderMode_TI12,TIM_ICPolarity_BothEdge, TIM_ICPolarity_BothEdge);
 	    TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
-	    TIM_Cmd(TIM1, ENABLE);
+
 
 	    TIM_ICInitTypeDef TIM_ICInitStruct;
 
@@ -118,6 +118,11 @@ void Encoder_Init(void)//инициализация таймера дола
 	    GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,GPIO_AF_TIM1);
 	    TIM1->CNT=0;
 	    TIM3->CNT=0;
+
+	    counter =0x80008000;
+	    counter2=0x80008000;
+	    TIM_Cmd(TIM3, ENABLE);
+	    TIM_Cmd(TIM1, ENABLE);
 
 	    xTaskCreate(DOL_Process,(signed char*)"DOL_PROCESS",128, NULL, tskIDLE_PRIORITY + 1, NULL);
 }
