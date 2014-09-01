@@ -484,7 +484,7 @@
       <source file="..\..\..\protocols\tablo_parser.h" lastModified="1476221aaa0">
          <include file="..\..\..\devices\indicator.h"/>
       </source>
-      <source file="..\..\..\main.c" lastModified="148306b579a">
+      <source file="..\..\..\main.c" lastModified="148316e7fb8">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>

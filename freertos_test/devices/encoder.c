@@ -41,6 +41,13 @@ void TIM1_UP_TIM10_IRQHandler(void)
   }
 }
 
+void delay(uint32_t time)
+{
+	while(time)
+	{
+		time--;
+	}
+}
 void Encoder_Init(void)//инициализаци€ таймера дола
 {
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);//тактируем портј
@@ -121,9 +128,10 @@ void Encoder_Init(void)//инициализаци€ таймера дола
 
 	    counter =0x80008000;
 	    counter2=0x80008000;
-	    TIM_Cmd(TIM3, ENABLE);
+	    delay(1000);
 	    TIM_Cmd(TIM1, ENABLE);
-
+	    delay(1000);
+	    TIM_Cmd(TIM3, ENABLE);
 	    xTaskCreate(DOL_Process,(signed char*)"DOL_PROCESS",128, NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 

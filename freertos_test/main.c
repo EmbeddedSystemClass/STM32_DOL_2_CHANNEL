@@ -38,7 +38,9 @@ static void Init_Task(void *pvParameters)
 	//Power_Detector_Init();
 	//vTaskDelay(200);
 	//Watchdog_Init();
+
 	Encoder_Init();
+
 	Proto_Init(PROTO_FIRST_INIT);
     vTaskDelete( NULL );
 }

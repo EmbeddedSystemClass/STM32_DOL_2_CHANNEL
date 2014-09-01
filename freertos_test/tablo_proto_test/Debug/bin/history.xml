@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
    <processor signature="4.7.2 -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -mthumb -Wall -g -nostartfiles -Map=tablo_proto_test.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\pilorama -TC:\CooCox\CoIDE\configuration\ProgramData\pilorama/link.ld -g">
-      <target file="tablo_proto_test.elf" lastModified="148313ababa">
+      <target file="tablo_proto_test.elf" lastModified="14831701924">
          <source file="..\obj\stm32f4xx_syscfg.o" lastModified="14830036947"/>
          <source file="..\obj\core_cm3.o" lastModified="148300369f3"/>
          <source file="..\obj\stm32f4xx_usart.o" lastModified="14830036ace"/>
@@ -9,10 +9,10 @@
          <source file="..\obj\proto.o" lastModified="148305b3a3c"/>
          <source file="..\obj\startup_stm32f4xx.o" lastModified="14830036dbc"/>
          <source file="..\obj\stm32f4xx_iwdg.o" lastModified="14830036e39"/>
-         <source file="..\obj\main.o" lastModified="148306b57e8"/>
+         <source file="..\obj\main.o" lastModified="148316e7e70"/>
          <source file="..\obj\stm32f4xx_rcc.o" lastModified="14830036fbf"/>
          <source file="..\obj\timers.o" lastModified="1483003700e"/>
-         <source file="..\obj\encoder.o" lastModified="148313ab7ad"/>
+         <source file="..\obj\encoder.o" lastModified="148317016e2"/>
          <source file="..\obj\watchdog.o" lastModified="148300371d3"/>
          <source file="..\obj\tasks.o" lastModified="148300372dc"/>
          <source file="..\obj\stm32f4xx_gpio.o" lastModified="14830037369"/>
