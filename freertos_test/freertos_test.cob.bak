@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Project>
+  <Device>
+    <Manufacturer id="ST" name="ST"/>
+    <Chip id="STM32F100RB" name="STM32F100RB"/>
+  </Device>
+  <Components>
+    <Component id="c37a9351-96ed-11df-80ae-001d7d723e56" name="C Library"/>
+    <Component id="c37f2731-96ed-11df-80ae-001d7d723e56" name="Retarget printf"/>
+    <Component id="bf7c3c91-96ed-11df-80ae-001d7d723e56" name="CMSIS core"/>
+    <Component id="bfa102a1-96ed-11df-80ae-001d7d723e56" name="RCC"/>
+    <Component id="bfe42621-96ed-11df-80ae-001d7d723e56" name="GPIO"/>
+    <Component id="bff208d1-96ed-11df-80ae-001d7d723e56" name="EXTI"/>
+    <Component id="c0446e91-96ed-11df-80ae-001d7d723e56" name="SPI"/>
+    <Component id="c064a0c1-96ed-11df-80ae-001d7d723e56" name="TIM"/>
+    <Component id="c3dde901-96ed-11df-80ae-001d7d723e56" name="USART"/>
+    <Component id="994b0730-4bc0-11e0-8e4a-001d7dcd0baf" name="CMSIS Boot"/>
+    <Component id="64d2c4e0-4e11-11e0-8ec0-001d7dcd0baf" name="MISC"/>
+  </Components>
+  <ExcludedFiles>
+    <Exclude path="C:/Program Files/CooCox/CoIDE/workspace/sample/syscalls/scall.c"/>
+    <Exclude path="C:/Program Files/CooCox/CoIDE/workspace/freertos_test/FreeRTOSV7.1.0/Source/portable/MemMang/heap_1.c"/>
+    <Exclude path="C:/Program Files/CooCox/CoIDE/workspace/freertos_test/FreeRTOSV7.1.0/Source/portable/MemMang/heap_3.c"/>
+    <Exclude path="C:/Program Files/CooCox/CoIDE/workspace/freertos_uso/freertos_test/FreeRTOSV7.1.0/Source/portable/MemMang/heap_1.c"/>
+    <Exclude path="C:/Program Files/CooCox/CoIDE/workspace/freertos_uso/freertos_test/FreeRTOSV7.1.0/Source/portable/MemMang/heap_3.c"/>
+    <Exclude path="C:/Program Files/CooCox/CoIDE/workspace/freertos_uso/freertos_test/uso/flash.c"/>
+    <Exclude path="C:/Program Files/CooCox/CoIDE/workspace/freertos_uso/freertos_test/uso/flash.h"/>
+    <Exclude path="C:/Program Files/CooCox/CoIDE/workspace/freertos_uso/freertos_test/uso/preferences.h"/>
+    <Exclude path="D:/PROJECTS/STM32/workspace/freertos_uso/freertos_test/FreeRTOSV7.1.0/Source/portable/MemMang/heap_1.c"/>
+    <Exclude path="D:/PROJECTS/STM32/workspace/freertos_uso/freertos_test/FreeRTOSV7.1.0/Source/portable/MemMang/heap_3.c"/>
+    <Exclude path="D:/PROJECTS/STM32/workspace/freertos_uso/freertos_test/uso/flash.c"/>
+    <Exclude path="D:/PROJECTS/STM32/workspace/freertos_uso/freertos_test/uso/flash.h"/>
+    <Exclude path="D:/PROJECTS/STM32/workspace/freertos_uso/freertos_test/lcd_menu/menu.c"/>
+    <Exclude path="D:/PROJECTS/STM32/workspace/freertos_uso/freertos_test/lcd_menu/menu.h"/>
+    <Exclude path="D:/PROJECTS/STM32/workspace/freertos_uso/freertos_test/emcu_driver/gpio_emcu.h"/>
+    <Exclude path="D:/PROJECTS/STM32/workspace/freertos_uso/freertos_test/emcu_driver/hd44780_emcu.c"/>
+    <Exclude path="D:/PROJECTS/STM32/workspace/freertos_uso/freertos_test/emcu_driver/hd44780_emcu.h"/>
+    <Exclude path="FreeRTOSV7.1.0/Source/portable/MemMang/heap_1.c"/>
+    <Exclude path="FreeRTOSV7.1.0/Source/portable/MemMang/heap_3.c"/>
+    <Exclude path="uso/flash.c"/>
+  </ExcludedFiles>
+  <Drivers/>
+</Project>

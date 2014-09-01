@@ -1,0 +1,354 @@
+11:24:03.656 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,clone,-A,admin,http://admin:edcde6@data.coocox.org:9090/cgi-bin/repo/7b0480d3-4fe3-4700-b0ea-d5dccd95c2be,C:/CooCox/CoIDE/repo\.rn\fossils\7b0480d3-4fe3-4700-b0ea-d5dccd95c2be.fossil] executed OK 
+Bytes      Cards  Artifacts     Deltas
+Sent:              53          1          0          0
+waiting for server...
+processed: 1%         
+processed: 4%         
+processed: 5%         
+processed: 18%         
+processed: 19%         
+processed: 20%         
+processed: 21%         
+processed: 90%         
+processed: 91%         
+processed: 97%         
+processed: 99%         
+Received:        4834         13          5          0
+Sent:              58          2          0          0
+waiting for server...
+processed: 3%         
+Received:         634          2          0          0
+Total network traffic: 644 bytes sent, 5674 bytes received
+Rebuilding repository meta-data...
+  0.0% complete...
+  20.0% complete...
+  40.0% complete...
+  60.0% complete...
+  80.0% complete...
+  100.0% complete...
+project-id: 76f01987b0e1f505f0dff728a9da8d4937daa7f5
+server-id:  b7a69fa4a9802752b9b02a175700e912d077710d
+admin-user: admin (password is "fa9d3a")
+
+11:24:06.062 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,open,C:/CooCox/CoIDE/repo\.rn\fossils\7b0480d3-4fe3-4700-b0ea-d5dccd95c2be.fossil,-latest] executed OK 
+doc/description.html
+doc/docInfo.dat
+src/example/DAC_SignalsGeneration.c
+project-name: <unnamed>
+repository:   C:/CooCox/CoIDE/repo\.rn\fossils\7b0480d3-4fe3-4700-b0ea-d5dccd95c2be.fossil
+local-root:   C:/CooCox/CoIDE/repo/Examples/961_DAC_SignalGeneration/
+user-home:    C:/Documents and Settings/А.Виноградов/Application Data
+project-code: 76f01987b0e1f505f0dff728a9da8d4937daa7f5
+checkout:     89feb446a958b35c343e69793b8433e1e9a937d5 2013-11-12 05:58:51 UTC
+parent:       1d8714ca04065734b704f766daa71a40e92ea9c6 2013-11-12 05:57:08 UTC
+tags:         trunk
+comment:      commit the example sourceCode (user: admin)
+
+11:24:06.406 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,close,-force] executed OK 
+
+
+11:24:10.234 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,clone,-A,admin,http://admin:9c9b78@data.coocox.org:9090/cgi-bin/repo/2c9a889e-290a-4d29-b74c-4f742d3ce906,C:/CooCox/CoIDE/repo\.rn\fossils\2c9a889e-290a-4d29-b74c-4f742d3ce906.fossil] executed OK 
+Bytes      Cards  Artifacts     Deltas
+Sent:              53          1          0          0
+waiting for server...
+processed: 3%         
+processed: 13%         
+processed: 17%         
+processed: 57%         
+processed: 61%         
+processed: 64%         
+processed: 67%         
+processed: 68%         
+processed: 72%         
+processed: 91%         
+processed: 92%         
+processed: 97%         
+Received:        1512         13          5          0
+Sent:              58          2          0          0
+waiting for server...
+processed: 3%         
+Received:         634          2          0          0
+Total network traffic: 645 bytes sent, 2352 bytes received
+Rebuilding repository meta-data...
+  0.0% complete...
+  20.0% complete...
+  40.0% complete...
+  60.0% complete...
+  80.0% complete...
+  100.0% complete...
+project-id: 9e0369d310fa60534ed46e38c8418ca930cea6d5
+server-id:  553d15366f085ba7cea683590fd0eb9e12a22188
+admin-user: admin (password is "dfc073")
+
+11:24:11.500 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,open,C:/CooCox/CoIDE/repo\.rn\fossils\2c9a889e-290a-4d29-b74c-4f742d3ce906.fossil,-latest] executed OK 
+doc/description.html
+doc/docInfo.dat
+src/stm32f4_discovery.c
+project-name: <unnamed>
+repository:   C:/CooCox/CoIDE/repo\.rn\fossils\2c9a889e-290a-4d29-b74c-4f742d3ce906.fossil
+local-root:   C:/CooCox/CoIDE/repo/Examples/1131_stm32f4_discovery/
+user-home:    C:/Documents and Settings/А.Виноградов/Application Data
+project-code: 9e0369d310fa60534ed46e38c8418ca930cea6d5
+checkout:     a7d815ba648cce0bf784cd4d89af600218af65f9 2014-01-13 13:51:34 UTC
+parent:       00e2d9e13563eb3c6c7e85772b12df49f5338f15 2014-01-13 13:51:26 UTC
+tags:         trunk
+comment:      commit the example sourceCode (user: admin)
+
+11:24:11.828 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,close,-force] executed OK 
+
+
+11:24:18.328 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,clone,-A,admin,http://admin:910f56@data.coocox.org:9090/cgi-bin/repo/4a5dc217-4d19-4c5f-8e74-eddf571eb84a,C:/CooCox/CoIDE/repo\.rn\fossils\4a5dc217-4d19-4c5f-8e74-eddf571eb84a.fossil] executed OK 
+Bytes      Cards  Artifacts     Deltas
+Sent:              53          1          0          0
+waiting for server...
+processed: 3%         
+processed: 13%         
+processed: 17%         
+processed: 56%         
+processed: 60%         
+processed: 63%         
+processed: 66%         
+processed: 67%         
+processed: 71%         
+processed: 91%         
+processed: 92%         
+processed: 97%         
+Received:        1532         13          5          0
+Sent:              58          2          0          0
+waiting for server...
+processed: 3%         
+Received:         634          2          0          0
+Total network traffic: 645 bytes sent, 2372 bytes received
+Rebuilding repository meta-data...
+  0.0% complete...
+  20.0% complete...
+  40.0% complete...
+  60.0% complete...
+  80.0% complete...
+  100.0% complete...
+project-id: de017de974f8f7188ff22bc16c0097fd9f966f28
+server-id:  2f41c8081e95d36331118a941b45f2cd1581655c
+admin-user: admin (password is "87d629")
+
+11:24:18.890 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,open,C:/CooCox/CoIDE/repo\.rn\fossils\4a5dc217-4d19-4c5f-8e74-eddf571eb84a.fossil,-latest] executed OK 
+doc/description.html
+doc/docInfo.dat
+src/stm32f4_discovery.c
+src/stm32f4_discovery.h
+src/stm32f4xx_it.c
+src/stm32f4xx_it.h
+project-name: <unnamed>
+repository:   C:/CooCox/CoIDE/repo\.rn\fossils\4a5dc217-4d19-4c5f-8e74-eddf571eb84a.fossil
+local-root:   C:/CooCox/CoIDE/repo/Examples/1132_stm32f4xx_it stm32f4_discovery/
+user-home:    C:/Documents and Settings/А.Виноградов/Application Data
+project-code: de017de974f8f7188ff22bc16c0097fd9f966f28
+checkout:     f97350cae8b9439ec971821b55f80b1e623bc4ed 2014-01-13 13:53:25 UTC
+parent:       558979b838a0c95e1f6bd1766065af8776568818 2014-01-13 13:53:20 UTC
+tags:         trunk
+comment:      commit the example sourceCode (user: admin)
+
+11:24:19.031 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,close,-force] executed OK 
+
+
+11:24:27.375 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,clone,-A,admin,http://admin:63b4ef@data.coocox.org:9090/cgi-bin/repo/4b54d577-2379-4d05-bb0b-6d4e83be4847,C:/CooCox/CoIDE/repo\.rn\fossils\4b54d577-2379-4d05-bb0b-6d4e83be4847.fossil] executed OK 
+Bytes      Cards  Artifacts     Deltas
+Sent:              53          1          0          0
+waiting for server...
+processed: 0%         
+processed: 1%         
+processed: 2%         
+processed: 6%         
+processed: 8%         
+processed: 13%         
+processed: 15%         
+processed: 18%         
+processed: 20%         
+processed: 22%         
+processed: 24%         
+processed: 25%         
+processed: 28%         
+processed: 30%         
+processed: 32%         
+processed: 34%         
+processed: 36%         
+processed: 38%         
+processed: 40%         
+processed: 42%         
+processed: 44%         
+processed: 52%         
+processed: 58%         
+processed: 63%         
+processed: 67%         
+processed: 68%         
+processed: 71%         
+processed: 74%         
+processed: 77%         
+processed: 79%         
+processed: 83%         
+processed: 85%         
+processed: 89%         
+processed: 92%         
+processed: 95%         
+processed: 98%         
+processed: 99%         
+Received:       91619         79         38          0
+Sent:              58          2          0          0
+waiting for server...
+processed: 3%         
+Received:         634          2          0          0
+Total network traffic: 646 bytes sent, 92460 bytes received
+Rebuilding repository meta-data...
+  0.0% complete...
+  2.6% complete...
+  5.2% complete...
+  7.8% complete...
+  10.5% complete...
+  13.1% complete...
+  15.7% complete...
+  18.4% complete...
+  21.0% complete...
+  23.6% complete...
+  26.3% complete...
+  28.9% complete...
+  31.5% complete...
+  34.2% complete...
+  36.8% complete...
+  39.4% complete...
+  42.1% complete...
+  44.7% complete...
+  47.3% complete...
+  50.0% complete...
+  52.6% complete...
+  55.2% complete...
+  57.8% complete...
+  60.5% complete...
+  63.1% complete...
+  65.7% complete...
+  68.4% complete...
+  71.0% complete...
+  73.6% complete...
+  76.3% complete...
+  78.9% complete...
+  81.5% complete...
+  84.2% complete...
+  86.8% complete...
+  89.4% complete...
+  92.1% complete...
+  94.7% complete...
+  97.3% complete...
+  100.0% complete...
+project-id: 8847d115738749fc421230b525d2c2b7111025e1
+server-id:  dc31e0192f8ab135454e8dfddaba10f9711a8b4a
+admin-user: admin (password is "e846b5")
+
+11:24:28.156 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,open,C:/CooCox/CoIDE/repo\.rn\fossils\4b54d577-2379-4d05-bb0b-6d4e83be4847.fossil,-latest] executed OK 
+doc/description.html
+doc/docInfo.dat
+src/app/appMain.c
+src/cadifra/fsmExample.cdd
+src/carme/inc/can.h
+src/carme/inc/can_sja1000.h
+src/carme/inc/carme.h
+src/carme/inc/carme_io1.h
+src/carme/inc/carme_io2.h
+src/carme/inc/cs42l51.h
+src/carme/inc/eeprom.h
+src/carme/inc/i2c.h
+src/carme/inc/i2s.h
+src/carme/inc/lcd_conf.h
+src/carme/inc/rtc.h
+src/carme/inc/rtc_ext.h
+src/carme/inc/ssd1963.h
+src/carme/inc/ssd1963_cmd.h
+src/carme/inc/ssd1963_lld.h
+src/carme/inc/stm32f4xx_conf.h
+src/carme/inc/uart.h
+src/carme/src/assert.c
+src/carme/src/can.c
+src/carme/src/carme.c
+src/carme/src/carme_io1.c
+src/carme/src/carme_io2.c
+src/carme/src/cs42l51.c
+src/carme/src/eeprom.c
+src/carme/src/i2c.c
+src/carme/src/i2s.c
+src/carme/src/rtc.c
+src/carme/src/rtc_ext.c
+src/carme/src/ssd1963.c
+src/carme/src/ssd1963_lld.c
+src/carme/src/uart.c
+src/stdio/printf.c
+project-name: <unnamed>
+repository:   C:/CooCox/CoIDE/repo\.rn\fossils\4b54d577-2379-4d05-bb0b-6d4e83be4847.fossil
+local-root:   C:/CooCox/CoIDE/repo/Examples/1281_CARME-M4/
+user-home:    C:/Documents and Settings/А.Виноградов/Application Data
+project-code: 8847d115738749fc421230b525d2c2b7111025e1
+checkout:     d6243a44d2f5df97acb1b5f2155196d7016c7ee6 2014-04-29 13:32:51 UTC
+parent:       e38362b883d23e9eef201c9f41f0df0ec32478d5 2014-04-29 14:32:47 UTC
+tags:         trunk
+comment:      commit the example sourceCode (user: admin)
+
+11:24:28.296 [Worker-10] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,close,-force] executed OK 
+
+
+11:24:38.781 [Worker-10] INFO  org.coocox.codb.common.log.ProcessTimeLog - 47`515`freshExamplesByCompId`40235
+12:02:47.937 [Worker-47] INFO  org.coocox.codb.common.log.ProcessTimeLog - 47`515`freshExamplesByCompId`547
+15:08:15.031 [Worker-128] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,clone,-A,admin,http://admin:d43acb@data.coocox.org:9090/cgi-bin/repo/4f2686b0-059d-4288-a21b-a76b4fcef7ff,C:/CooCox/CoIDE/repo\.rn\fossils\4f2686b0-059d-4288-a21b-a76b4fcef7ff.fossil] executed OK 
+Bytes      Cards  Artifacts     Deltas
+Sent:              53          1          0          0
+waiting for server...
+processed: 1%         
+processed: 4%         
+processed: 5%         
+processed: 19%         
+processed: 20%         
+processed: 21%         
+processed: 23%         
+processed: 89%         
+processed: 90%         
+processed: 97%         
+processed: 99%         
+Received:        4458         13          5          0
+Sent:              58          2          0          0
+waiting for server...
+processed: 3%         
+Received:         634          2          0          0
+Total network traffic: 647 bytes sent, 5298 bytes received
+Rebuilding repository meta-data...
+  0.0% complete...
+  20.0% complete...
+  40.0% complete...
+  60.0% complete...
+  80.0% complete...
+  100.0% complete...
+project-id: ef96fc1582f0438159292b734265d7e5c58bd27d
+server-id:  6e1a03c98ec3172e8055cfe554199c8627edad42
+admin-user: admin (password is "64e5e1")
+
+15:08:18.468 [Worker-128] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,open,C:/CooCox/CoIDE/repo\.rn\fossils\4f2686b0-059d-4288-a21b-a76b4fcef7ff.fossil,-latest] executed OK 
+doc/description.html
+doc/docInfo.dat
+src/example/RTC_LSI.c
+project-name: <unnamed>
+repository:   C:/CooCox/CoIDE/repo\.rn\fossils\4f2686b0-059d-4288-a21b-a76b4fcef7ff.fossil
+local-root:   C:/CooCox/CoIDE/repo/Examples/970_RTC_LSI/
+user-home:    C:/Documents and Settings/А.Виноградов/Application Data
+project-code: ef96fc1582f0438159292b734265d7e5c58bd27d
+checkout:     01587374a2a71f9a79ecd5ad1de5c175676cc8a8 2013-11-12 06:22:53 UTC
+parent:       5a387a631fe8c06b6983c0d8648dc98d5e5b63ef 2013-11-12 06:21:07 UTC
+tags:         trunk
+comment:      commit the example sourceCode (user: admin)
+
+15:08:18.921 [Worker-128] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,close,-force] executed OK 
+
+
+15:08:21.281 [Worker-128] ERROR org.coocox.codb.common.log.ErrorLog - freshExamplesByCompId API failed 
+org.coocox.sqlite.dbsource.DataBaseSource.executeUpdate(DataBaseSource.java:2242)
+org.coocox.sqlite.dao.impl.ExampleDaoImpl.deleteExamBelongComp(ExampleDaoImpl.java:267)
+org.coocox.codb.client.core.api.impl.ExampleApiImpl.freshExamplesByCompId(ExampleApiImpl.java:319)
+org.coocox.example.core.impl.ExampleDBCmdHandler.freshExamplesByCompId(ExampleDBCmdHandler.java:51)
+org.coocox.integrate.component.views.ComponentView$4$1.run(ComponentView.java:346)
+org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+
+15:08:21.312 [Worker-165] INFO  org.coocox.codb.common.log.ProcessTimeLog - 47`506`freshExamplesByCompId`937

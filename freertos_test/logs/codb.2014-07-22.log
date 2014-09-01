@@ -1,0 +1,144 @@
+11:21:08.328 [Worker-241] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,clone,-A,admin,http://admin:f71dd1@data.coocox.org:9090/cgi-bin/repo/4eeff077-37c0-4a03-9b32-31a1a7f5c626,C:/CooCox/CoIDE/repo\.rn\fossils\4eeff077-37c0-4a03-9b32-31a1a7f5c626.fossil] executed OK 
+Bytes      Cards  Artifacts     Deltas
+Sent:              53          1          0          0
+waiting for server...
+processed: 1%         
+processed: 5%         
+processed: 6%         
+processed: 21%         
+processed: 22%         
+processed: 24%         
+processed: 25%         
+processed: 88%         
+processed: 89%         
+processed: 96%         
+processed: 97%         
+processed: 99%         
+Received:        4077         13          5          0
+Sent:              58          2          0          0
+waiting for server...
+processed: 3%         
+Received:         634          2          0          0
+Total network traffic: 644 bytes sent, 4917 bytes received
+Rebuilding repository meta-data...
+  0.0% complete...
+  20.0% complete...
+  40.0% complete...
+  60.0% complete...
+  80.0% complete...
+  100.0% complete...
+project-id: b2ebaf121fae33fe992f82e239f437bdd202306c
+server-id:  5ae10988905a207c9999b14403f58caf5e76d17f
+admin-user: admin (password is "1df976")
+
+11:21:09.453 [Worker-241] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,open,C:/CooCox/CoIDE/repo\.rn\fossils\4eeff077-37c0-4a03-9b32-31a1a7f5c626.fossil,-latest] executed OK 
+doc/description.html
+doc/docInfo.dat
+src/example/ADC3_DMA.c
+project-name: <unnamed>
+repository:   C:/CooCox/CoIDE/repo\.rn\fossils\4eeff077-37c0-4a03-9b32-31a1a7f5c626.fossil
+local-root:   C:/CooCox/CoIDE/repo/Examples/962_ADC3_DMA/
+user-home:    C:/Documents and Settings/А.Виноградов/Application Data
+project-code: b2ebaf121fae33fe992f82e239f437bdd202306c
+checkout:     9eb0a527f87087113f67e6104c77508c1bdbdfe8 2013-11-12 06:01:55 UTC
+parent:       b5d9d76e223d9a38e3e54e5bb2fac2e4c8e02e6e 2013-11-12 06:00:12 UTC
+tags:         trunk
+comment:      commit the example sourceCode (user: admin)
+
+11:21:09.609 [Worker-241] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,close,-force] executed OK 
+
+
+11:21:15.125 [Worker-241] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,clone,-A,admin,http://admin:430f0d@data.coocox.org:9090/cgi-bin/repo/2f78b22a-5cd5-4668-82ab-aaecfbb039fe,C:/CooCox/CoIDE/repo\.rn\fossils\2f78b22a-5cd5-4668-82ab-aaecfbb039fe.fossil] executed OK 
+Bytes      Cards  Artifacts     Deltas
+Sent:              53          1          0          0
+waiting for server...
+processed: 2%         
+processed: 8%         
+processed: 11%         
+processed: 36%         
+processed: 38%         
+processed: 40%         
+processed: 42%         
+processed: 80%         
+processed: 83%         
+processed: 94%         
+processed: 95%         
+processed: 98%         
+Received:        2418         13          5          0
+Sent:              58          2          0          0
+waiting for server...
+processed: 3%         
+Received:         634          2          0          0
+Total network traffic: 642 bytes sent, 3258 bytes received
+Rebuilding repository meta-data...
+  0.0% complete...
+  20.0% complete...
+  40.0% complete...
+  60.0% complete...
+  80.0% complete...
+  100.0% complete...
+project-id: 509ed3ca9d7d48f7618d310ee96a2c94034ddffd
+server-id:  a3bac15a5011a867697b7ba5529f628bf35e93ef
+admin-user: admin (password is "d7cd83")
+
+11:21:15.812 [Worker-241] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,open,C:/CooCox/CoIDE/repo\.rn\fossils\2f78b22a-5cd5-4668-82ab-aaecfbb039fe.fossil,-latest] executed OK 
+doc/description.html
+doc/docInfo.dat
+src/main.c
+project-name: <unnamed>
+repository:   C:/CooCox/CoIDE/repo\.rn\fossils\2f78b22a-5cd5-4668-82ab-aaecfbb039fe.fossil
+local-root:   C:/CooCox/CoIDE/repo/Examples/1007_ADC without DMA/
+user-home:    C:/Documents and Settings/А.Виноградов/Application Data
+project-code: 509ed3ca9d7d48f7618d310ee96a2c94034ddffd
+checkout:     71fb0522b63b1ad582b8ca103eaf8a6001c545de 2013-11-18 11:59:48 UTC
+parent:       b903e3ac55066e384ccddf19fa4c036084172bf9 2013-11-18 11:59:45 UTC
+tags:         trunk
+comment:      commit the example sourceCode (user: admin)
+
+11:21:15.906 [Worker-241] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,close,-force] executed OK 
+
+
+11:21:20.078 [Worker-241] INFO  org.coocox.codb.common.log.ErrorLog - [C:/CooCox/CoIDE/bin\fossil.exe,clone,-A,admin,http://admin:f25532@data.coocox.org:9090/cgi-bin/repo/890c9d15-f676-4dd2-898a-448db3d99c48,C:/CooCox/CoIDE/repo\.rn\fossils\890c9d15-f676-4dd2-898a-448db3d99c48.fossil] executed OK 
+Bytes      Cards  Artifacts     Deltas
+Sent:              53          1          0          0
+waiting for server...
+processed: 2%         
+processed: 8%         
+processed: 10%         
+processed: 35%         
+processed: 37%         
+processed: 39%         
+processed: 41%         
+processed: 81%         
+processed: 83%         
+processed: 94%         
+processed: 95%         
+processed: 98%         
+Received:        2483         13          5          0
+Sent:              58          2          0          0
+waiting for server...
+processed: 3%         
+Received:         634          2          0          0
+Total network traffic: 645 bytes sent, 3323 bytes received
+Rebuilding repository meta-data...
+  0.0% complete...
+  20.0% complete...
+  40.0% complete...
+  60.0% complete...
+  80.0% complete...
+  100.0% complete...
+project-id: 9d9e84c144b21e0805592e078f3b59f56d5e9706
+server-id:  130a798d261b97ad048c5c676de7484060c59aa7
+admin-user: admin (password is "f10685")
+
+11:21:20.109 [Worker-241] ERROR org.coocox.codb.common.log.ErrorLog - freshExamplesByCompId API failed 
+fossilwrapper close errored!
+org.coocox.codb.common.fossil.FossilWrapper.close(FossilWrapper.java:463)
+org.coocox.codb.common.fossil.Fossil.checkOutTheLatestVersion(Fossil.java:142)
+org.coocox.codb.client.core.service.RepoService.checkOutComponet(RepoService.java:166)
+org.coocox.codb.client.core.api.impl.ExampleApiImpl.freshExamplesByCompId(ExampleApiImpl.java:273)
+org.coocox.example.core.impl.ExampleDBCmdHandler.freshExamplesByCompId(ExampleDBCmdHandler.java:51)
+org.coocox.integrate.component.views.ComponentView$4$1.run(ComponentView.java:346)
+org.eclipse.core.internal.jobs.Worker.run(Worker.java:54)
+
+
