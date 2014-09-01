@@ -27,11 +27,11 @@
       <target file="timers.o" lastModified="1483003700e">
          <source file="..\..\..\FreeRTOSV7.1.0\Source\timers.c" lastModified="13e3b1eb910"/>
       </target>
-      <target file="proto.o" lastModified="148305b3a3c">
-         <source file="..\..\..\protocols\proto.c" lastModified="148305b2f30"/>
-      </target>
       <target file="stm32f4xx_iwdg.o" lastModified="14830036e39">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_iwdg.c" lastModified="1428e61eab6"/>
+      </target>
+      <target file="proto.o" lastModified="148305b3a3c">
+         <source file="..\..\..\protocols\proto.c" lastModified="148305b2f30"/>
       </target>
       <target file="tasks.o" lastModified="148300372dc">
          <source file="..\..\..\FreeRTOSV7.1.0\Source\tasks.c" lastModified="13e3b1eb910"/>
@@ -90,11 +90,11 @@
       <target file="stm32f4xx_spi.o" lastModified="148300377fd">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="14125d81f8b"/>
       </target>
-      <target file="encoder.o" lastModified="14830037156">
-         <source file="..\..\..\devices\encoder.c" lastModified="14743ff6f1e"/>
+      <target file="encoder.o" lastModified="148311fda0d">
+         <source file="..\..\..\devices\encoder.c" lastModified="148311fbf13"/>
       </target>
-      <target file="main.o" lastModified="1483058c0c0">
-         <source file="..\..\..\main.c" lastModified="1483058bae4"/>
+      <target file="main.o" lastModified="148306b57e8">
+         <source file="..\..\..\main.c" lastModified="148306b4fca"/>
       </target>
       <target file="system_stm32f4xx.o" lastModified="14830037463">
          <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1428e3c1104"/>
