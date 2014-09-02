@@ -1,6 +1,8 @@
 #include "encoder.h"
 #include "channels.h"
+#include "watchdog.h"
 extern struct Channel  channels[];//обобщенная структура каналов
+extern struct task_watch task_watches[];
 
 uint32_t counter =0x80008000;
 uint32_t counter2=0x80008000;
@@ -64,31 +66,31 @@ void Encoder_Init(void)//инициализация таймера дола
 	    TIM_TimeBaseInit(TIM3, &timer_base);
 	    TIM_TimeBaseInit(TIM1, &timer_base);
 
-	    TIM_EncoderInterfaceConfig(TIM3, TIM_EncoderMode_TI12,TIM_ICPolarity_BothEdge, TIM_ICPolarity_BothEdge);
-	    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+	    TIM_EncoderInterfaceConfig(TIM3, TIM_EncoderMode_TI12,TIM_ICPolarity_Falling, TIM_ICPolarity_Falling);
+	   // TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
 
 
-	    TIM_EncoderInterfaceConfig(TIM1, TIM_EncoderMode_TI12,TIM_ICPolarity_BothEdge, TIM_ICPolarity_BothEdge);
-	    TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
+	    TIM_EncoderInterfaceConfig(TIM1, TIM_EncoderMode_TI12,TIM_ICPolarity_Falling, TIM_ICPolarity_Falling);
+	   // TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
 
 
-	    TIM_ICInitTypeDef TIM_ICInitStruct;
-
-	    TIM_ICInitStruct.TIM_Channel=TIM_Channel_1;
-	    TIM_ICInitStruct.TIM_ICFilter=0xF;
-	    TIM_ICInit(TIM1, &TIM_ICInitStruct);
-	    TIM_ICInit(TIM3, &TIM_ICInitStruct);
-	    TIM_ICInitStruct.TIM_Channel=TIM_Channel_2;
-	    TIM_ICInitStruct.TIM_ICFilter=0xF;
-	    TIM_ICInit(TIM1, &TIM_ICInitStruct);
-	    TIM_ICInit(TIM3, &TIM_ICInitStruct);
+//	    TIM_ICInitTypeDef TIM_ICInitStruct;
+//
+//	    TIM_ICInitStruct.TIM_Channel=TIM_Channel_1;
+//	    TIM_ICInitStruct.TIM_ICFilter=0x0;
+//	    TIM_ICInit(TIM1, &TIM_ICInitStruct);
+//	    TIM_ICInit(TIM3, &TIM_ICInitStruct);
+//	    TIM_ICInitStruct.TIM_Channel=TIM_Channel_2;
+//	    TIM_ICInitStruct.TIM_ICFilter=0x0;
+//	    TIM_ICInit(TIM1, &TIM_ICInitStruct);
+//	    TIM_ICInit(TIM3, &TIM_ICInitStruct);
 
 	    //настройка прерывания дола
 	    NVIC_InitTypeDef NVIC_InitStructure;
 
 	    NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
 	    NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
-	    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 15;
+	    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 14;
 	    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 14;
 	    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	    NVIC_Init(&NVIC_InitStructure);
@@ -106,9 +108,9 @@ void Encoder_Init(void)//инициализация таймера дола
 
 	    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6|GPIO_Pin_7;
 	    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF;;
-	    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	    //GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
 	    GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 	    GPIO_PinAFConfig(GPIOA, GPIO_PinSource6, GPIO_AF_TIM3);
@@ -116,9 +118,9 @@ void Encoder_Init(void)//инициализация таймера дола
 
 	    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_9;
 	    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF;;
-	    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
-	    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+	    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	   // GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+	    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
 	    GPIO_Init(GPIOA, &GPIO_InitStructure);
 
 	    GPIO_PinAFConfig(GPIOA,GPIO_PinSource8,GPIO_AF_TIM1);
@@ -128,19 +130,27 @@ void Encoder_Init(void)//инициализация таймера дола
 
 	    counter =0x80008000;
 	    counter2=0x80008000;
-	    delay(1000);
+
+	    TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
+	    TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+	    TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
+	    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+	  //  delay(1000);
 	    TIM_Cmd(TIM1, ENABLE);
-	    delay(1000);
+	  //  delay(1000);
 	    TIM_Cmd(TIM3, ENABLE);
 	    xTaskCreate(DOL_Process,(signed char*)"DOL_PROCESS",128, NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
 void DOL_Process( void *pvParameters )//процесс обновления регистра дола-необязательный
 {
+	task_watches[DOL_TASK].task_status=TASK_IDLE;
 	while(1)
 	{
+		task_watches[DOL_TASK].task_status=TASK_ACTIVE;
 		channels[0].channel_data=counter+TIM3->CNT;
 		channels[1].channel_data=counter2+TIM1->CNT;
+		task_watches[DOL_TASK].counter++;
 		vTaskDelay(50);
 	}
 }

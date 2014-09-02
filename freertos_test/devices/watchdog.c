@@ -47,7 +47,7 @@ void Watchdog_Init(void)
 	  /* Enable IWDG (the LSI oscillator will be enabled by hardware) */
 	  IWDG_Enable();
 
-	  xTaskCreate(Watchdog_Task,(signed char*)"INIT",64,NULL, tskIDLE_PRIORITY + 1, NULL);
+	  xTaskCreate(Watchdog_Task,(signed char*)"INIT",128,NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
 
@@ -55,21 +55,14 @@ static void Watchdog_Task(void *pvParameters)
 {
 	while(1)
 	{
-		if(((task_watches[SPI_TASK_1].counter>0)	||(task_watches[SPI_TASK_1].task_status==TASK_IDLE))&&
-		   ((task_watches[SPI_TASK_2].counter>0)	||(task_watches[SPI_TASK_2].task_status==TASK_IDLE))&&
-		   ((task_watches[SPI_TASK_3].counter>0)	||(task_watches[SPI_TASK_3].task_status==TASK_IDLE))&&
-		   ((task_watches[PROTO_TASK].counter>0)	||(task_watches[PROTO_TASK].task_status==TASK_IDLE))&&
-		   ((task_watches[KEYBOARD_TASK].counter>0)	||(task_watches[KEYBOARD_TASK].task_status==TASK_IDLE))&&
-		   ((task_watches[BUZZER_TASK].counter>0)	||(task_watches[BUZZER_TASK].task_status==TASK_IDLE)))
+		if(((task_watches[PROTO_TASK].counter>0)||(task_watches[PROTO_TASK].task_status==TASK_IDLE))&&
+		   ((task_watches[DOL_TASK].counter>0)	||(task_watches[DOL_TASK].task_status==TASK_IDLE)))
 		{//проверка счетчиков
 			IWDG_ReloadCounter();
 		}
-		task_watches[SPI_TASK_1].counter=0;
-		task_watches[SPI_TASK_2].counter=0;
-		task_watches[SPI_TASK_3].counter=0;
+
 		task_watches[PROTO_TASK].counter=0;
-		task_watches[KEYBOARD_TASK].counter=0;
-		task_watches[BUZZER_TASK].counter=0;
+		task_watches[DOL_TASK].counter=0;
 		vTaskDelay(500);
 	}
 }

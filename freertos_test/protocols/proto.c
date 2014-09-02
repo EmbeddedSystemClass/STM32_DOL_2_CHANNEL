@@ -306,7 +306,7 @@ void Proto_Init(uint8_t init_type) //
 
 		USART_Cmd(USART_RS485, ENABLE);
 
-		NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
+		NVIC_PriorityGroupConfig( NVIC_PriorityGroup_3 );
 
 		   /* Enabling interrupt from USART */
 		NVIC_InitStructure.NVIC_IRQChannel = USART_RS485_IRQn;
