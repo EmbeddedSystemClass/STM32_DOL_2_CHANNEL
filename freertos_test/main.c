@@ -20,35 +20,16 @@
 #include "proto.h"
 #include "watchdog.h"
 
-//#include "power_detector.h"
+#include "power_detector.h"
 #include "encoder.h"
-
-
-//
-//static void Init_Task(void *pvParameters);//
-//
-//static void Init_Task(void *pvParameters)
-//{
-//
-//	//Power_Detector_Init();
-//	//vTaskDelay(200);
-//	Watchdog_Init();
-//	Encoder_Init();
-//	Proto_Init(PROTO_FIRST_INIT);
-//    vTaskDelete( NULL );
-//}
 
 int main(void)
 {
 	SystemInit();
-
-	//Watchdog_Init();
-
+	Power_Detector_Init();
+	Watchdog_Init();
 	Encoder_Init();
 	Proto_Init(PROTO_FIRST_INIT);
-
- //   xTaskCreate(Init_Task,(signed char*)"INIT",128,NULL, tskIDLE_PRIORITY + 1, NULL);
-
     vTaskStartScheduler();
 
     while(1);

@@ -648,10 +648,10 @@ void ProtoProcess( void *pvParameters )
 				}
 				task_watches[PROTO_TASK].counter++;
 			}
-//			else
-//			{
-//				 Proto_Init(PROTO_REINIT);
-//			}
+			else
+			{
+				 Proto_Init(PROTO_REINIT);
+			}
 		}
 		task_watches[PROTO_TASK].task_status=TASK_IDLE;
 	}

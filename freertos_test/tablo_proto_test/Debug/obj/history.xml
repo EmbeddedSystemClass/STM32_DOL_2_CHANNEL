@@ -30,8 +30,8 @@
       <target file="stm32f4xx_iwdg.o" lastModified="14835c9eab7">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_iwdg.c" lastModified="14835c96d0b"/>
       </target>
-      <target file="proto.o" lastModified="14835c53f38">
-         <source file="..\..\..\protocols\proto.c" lastModified="14835c53219"/>
+      <target file="proto.o" lastModified="1483a6d339a">
+         <source file="..\..\..\protocols\proto.c" lastModified="1483a6cd666"/>
       </target>
       <target file="tasks.o" lastModified="148300372dc">
          <source file="..\..\..\FreeRTOSV7.1.0\Source\tasks.c" lastModified="13e3b1eb910"/>
@@ -93,8 +93,8 @@
       <target file="encoder.o" lastModified="14836236833">
          <source file="..\..\..\devices\encoder.c" lastModified="14836235efc"/>
       </target>
-      <target file="main.o" lastModified="1483621c8db">
-         <source file="..\..\..\main.c" lastModified="1483621abcd"/>
+      <target file="main.o" lastModified="1483a6f03e5">
+         <source file="..\..\..\main.c" lastModified="1483a6ec41d"/>
       </target>
       <target file="system_stm32f4xx.o" lastModified="14830037463">
          <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1428e3c1104"/>

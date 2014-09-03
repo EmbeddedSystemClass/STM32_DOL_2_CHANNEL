@@ -271,7 +271,7 @@
       <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="14835c29268">
          <include file="..\..\..\cmsis_lib\include\misc.h"/>
       </source>
-      <source file="..\..\..\protocols\proto.c" lastModified="14835c53219">
+      <source file="..\..\..\protocols\proto.c" lastModified="1483a6cd666">
          <include file="..\..\..\protocols\proto.h"/>
          <include file="..\..\..\protocols\channels.h"/>
          <include file="..\..\..\protocols\tablo_parser.h"/>
@@ -411,6 +411,11 @@
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\timers.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\StackMacros.h"/>
       </source>
+      <source file="..\..\..\devices\encoder.c" lastModified="14836235efc">
+         <include file="..\..\..\devices\encoder.h"/>
+         <include file="..\..\..\protocols\channels.h"/>
+         <include file="..\..\..\devices\watchdog.h"/>
+      </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="14835b06da1">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
@@ -456,7 +461,7 @@
       <source file="..\..\..\protocols\tablo_parser.h" lastModified="1476221aaa0">
          <include file="..\..\..\devices\indicator.h"/>
       </source>
-      <source file="..\..\..\main.c" lastModified="1483621b39d">
+      <source file="..\..\..\main.c" lastModified="1483a6ecbed">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
@@ -469,6 +474,7 @@
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\semphr.h"/>
          <include file="..\..\..\protocols\proto.h"/>
          <include file="..\..\..\devices\watchdog.h"/>
+         <include file="..\..\..\devices\power_detector.h"/>
          <include file="..\..\..\devices\encoder.h"/>
       </source>
       <source file="..\..\..\devices\buzzer.h" lastModified="14293ce3ba6">
