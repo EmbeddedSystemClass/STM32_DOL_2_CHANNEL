@@ -1,27 +1,36 @@
 #include "encoder.h"
 #include "channels.h"
 #include "watchdog.h"
-extern struct Channel  channels[];//îáîáùåííàÿ ñòðóêòóðà êàíàëîâ
+extern struct Channel  channels[];//Ð¾Ð±Ð¾Ð±Ñ‰ÐµÐ½Ð½Ð°Ñ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° ÐºÐ°Ð½Ð°Ð»Ð¾Ð²
 extern struct task_watch task_watches[];
 
 uint32_t counter =0x80008000;
 uint32_t counter2=0x80008000;
+uint32_t period=0;
+uint32_t period_tim=0;
+uint32_t period_overload=0;
 
 void DOL_Process( void *pvParameters );
 
 void TIM3_IRQHandler(void)
 {
-  if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
+ // if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
   {
-    TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+    //TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
+
+	TIM3->SR = (uint16_t)~TIM_IT_Update;
+//	period_tim=TIM2->CNT;
+    period=period_overload+TIM2->CNT;
+    period_overload=0;
+    TIM2->CNT=0;
 
     if(TIM3->CR1 & TIM_CR1_DIR)
     {
-    	counter-=0x1001 ;
+    	counter-=0x4;//0x1001 ;
     }
     else
     {
-    	counter+=0x1001;
+    	counter+=0x4;//0x1001;
     }
   }
 }
@@ -32,14 +41,26 @@ void TIM1_UP_TIM10_IRQHandler(void)
   {
     TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
 
+
+
     if(TIM1->CR1 & TIM_CR1_DIR)
     {
-    	counter2-=0x1001;
+    	counter2-=0x4;//0x1001;
     }
     else
     {
-    	counter2+=0x1001;
+    	counter2+=0x4;//0x1001;
     }
+  }
+}
+
+void TIM2_IRQHandler(void)
+{
+  if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+  {
+    //TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+	  TIM2->SR = (uint16_t)~TIM_IT_Update;
+	  period_overload+=10000;
   }
 }
 
@@ -50,16 +71,32 @@ void delay(uint32_t time)
 		time--;
 	}
 }
-void Encoder_Init(void)//èíèöèàëèçàöèÿ òàéìåðà äîëà
-{
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);//òàêòèðóåì ïîðòÀ
-	RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM3EN, ENABLE);//òàêòèðóåì òàéìåð 3
-	RCC_APB2PeriphClockCmd(RCC_APB2ENR_TIM1EN, ENABLE);//òàêòèðóåì òàéìåð 1
 
-	 	//íàñòðîéêà òàéìåðà äîëà
+
+
+void Freq_Measure_Init(void)
+{
+	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM2EN, ENABLE);
+	  TIM_TimeBaseInitTypeDef timer_base;
+	  TIM_TimeBaseStructInit(&timer_base);
+	  timer_base.TIM_Prescaler = 2400 - 1;
+	  timer_base.TIM_Period = 10000;//500;
+	  TIM_TimeBaseInit(TIM2, &timer_base);
+	  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+	  NVIC_EnableIRQ(TIM2_IRQn);
+	  TIM_Cmd(TIM2, ENABLE);
+}
+
+void Encoder_Init(void)//Ð¸Ð½Ð¸Ñ†Ð¸Ð°Ð»Ð¸Ð·Ð°Ñ†Ð¸Ñ Ñ‚Ð°Ð¹Ð¼ÐµÑ€Ð° Ð´Ð¾Ð»Ð°
+{
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);//Ñ‚Ð°ÐºÑ‚Ð¸Ñ€ÑƒÐµÐ¼ Ð¿Ð¾Ñ€Ñ‚Ð
+	RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM3EN, ENABLE);//Ñ‚Ð°ÐºÑ‚Ð¸Ñ€ÑƒÐµÐ¼ Ñ‚Ð°Ð¹Ð¼ÐµÑ€ 3
+	RCC_APB2PeriphClockCmd(RCC_APB2ENR_TIM1EN, ENABLE);//Ñ‚Ð°ÐºÑ‚Ð¸Ñ€ÑƒÐµÐ¼ Ñ‚Ð°Ð¹Ð¼ÐµÑ€ 1
+
+	 	//Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Ñ‚Ð°Ð¹Ð¼ÐµÑ€Ð° Ð´Ð¾Ð»Ð°
 		TIM_TimeBaseInitTypeDef timer_base;
 	    TIM_TimeBaseStructInit(&timer_base);
-	    timer_base.TIM_Period = 0x1000;
+	    timer_base.TIM_Period = 0x3;//0x1000;
 	    timer_base.TIM_Prescaler=0;
 	    timer_base.TIM_ClockDivision= TIM_CKD_DIV1;
 	    timer_base.TIM_CounterMode = TIM_CounterMode_Down | TIM_CounterMode_Up;
@@ -85,7 +122,7 @@ void Encoder_Init(void)//èíèöèàëèçàöèÿ òàéìåðà äîëà
 //	    TIM_ICInit(TIM1, &TIM_ICInitStruct);
 //	    TIM_ICInit(TIM3, &TIM_ICInitStruct);
 
-	    //íàñòðîéêà ïðåðûâàíèÿ äîëà
+	    //Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Ð¿Ñ€ÐµÑ€Ñ‹Ð²Ð°Ð½Ð¸Ñ Ð´Ð¾Ð»Ð°
 	    NVIC_InitTypeDef NVIC_InitStructure;
 
 	    NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
@@ -103,7 +140,7 @@ void Encoder_Init(void)//èíèöèàëèçàöèÿ òàéìåðà äîëà
 	    NVIC_Init(&NVIC_InitStructure);
 
 
-	    //íàñòðîéêà ïèíîâ ìèêðîêîíòðîëëåðà
+	    //Ð½Ð°ÑÑ‚Ñ€Ð¾Ð¹ÐºÐ° Ð¿Ð¸Ð½Ð¾Ð² Ð¼Ð¸ÐºÑ€Ð¾ÐºÐ¾Ð½Ñ‚Ñ€Ð¾Ð»Ð»ÐµÑ€Ð°
 	    GPIO_InitTypeDef  GPIO_InitStructure;
 
 	    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6|GPIO_Pin_7;
@@ -135,21 +172,40 @@ void Encoder_Init(void)//èíèöèàëèçàöèÿ òàéìåðà äîëà
 	    TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 	    TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
 	    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
+
 	  //  delay(1000);
 	    TIM_Cmd(TIM1, ENABLE);
 	  //  delay(1000);
 	    TIM_Cmd(TIM3, ENABLE);
+	    Freq_Measure_Init();
 	    xTaskCreate(DOL_Process,(signed char*)"DOL_PROCESS",128, NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
-void DOL_Process( void *pvParameters )//ïðîöåññ îáíîâëåíèÿ ðåãèñòðà äîëà-íåîáÿçàòåëüíûé
+void DOL_Process( void *pvParameters )//Ð¿Ñ€Ð¾Ñ†ÐµÑÑ Ð¾Ð±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¸Ñ Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð° Ð´Ð¾Ð»Ð°-Ð½ÐµÐ¾Ð±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÐ½Ñ‹Ð¹
 {
 	task_watches[DOL_TASK].task_status=TASK_IDLE;
 	while(1)
 	{
 		task_watches[DOL_TASK].task_status=TASK_ACTIVE;
-		channels[0].channel_data=counter+TIM3->CNT;
-		channels[1].channel_data=counter2+TIM1->CNT;
+		channels[0].channel_data=counter+TIM3->CNT;//Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ ÐºÑ€Ð¸Ñ‚Ð¸Ñ‡ÐµÑÐºÑƒÑŽ ÑÐµÐºÑ†Ð¸ÑŽ
+
+		if(period_overload>=100000)
+		{
+			channels[1].channel_data=0;
+			period_overload=100000;
+		}
+		else
+		{
+			uint32_t freq=(10000<<8)/period;
+			if(freq>=0xFFFF)
+			{
+				channels[1].channel_data=0xFFFF;
+			}
+			else
+			{
+				channels[1].channel_data=(10000<<8)/period;//counter2+TIM1->CNT;
+			}
+		}
 		task_watches[DOL_TASK].counter++;
 		vTaskDelay(50);
 	}
