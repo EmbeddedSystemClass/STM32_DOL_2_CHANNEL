@@ -14,7 +14,7 @@ void DOL_Process( void *pvParameters );
 void TIM3_IRQHandler(void)
 {
  // if (TIM_GetITStatus(TIM3, TIM_IT_Update) != RESET)
-  {
+//  {
     //TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 
 	TIM3->SR = (uint16_t)~TIM_IT_Update;
@@ -24,13 +24,13 @@ void TIM3_IRQHandler(void)
 
     if(TIM3->CR1 & TIM_CR1_DIR)
     {
-    	counter-=0x4;//0x1001 ;
+    	counter-=ENC_INT_PERIOD;// ;
     }
     else
     {
-    	counter+=0x4;//0x1001;
+    	counter+=ENC_INT_PERIOD;//;
     }
-  }
+//  }
 }
 
 void TIM1_UP_TIM10_IRQHandler(void)
@@ -43,11 +43,11 @@ void TIM1_UP_TIM10_IRQHandler(void)
 
     if(TIM1->CR1 & TIM_CR1_DIR)
     {
-    	counter2-=0x4;//0x1001;
+    	counter2-=ENC_INT_PERIOD;//;
     }
     else
     {
-    	counter2+=0x4;//0x1001;
+    	counter2+=ENC_INT_PERIOD;//;
     }
   }
 }
@@ -92,7 +92,7 @@ void Encoder_Init(void)//инициализация таймера дола
 	 	//настройка таймера дола
 		TIM_TimeBaseInitTypeDef timer_base;
 	    TIM_TimeBaseStructInit(&timer_base);
-	    timer_base.TIM_Period = 0x3;//0x1000;
+	    timer_base.TIM_Period = ENC_INT_PERIOD-1;//;
 	    timer_base.TIM_Prescaler=0;
 	    timer_base.TIM_ClockDivision= TIM_CKD_DIV1;
 	    timer_base.TIM_CounterMode = TIM_CounterMode_Down | TIM_CounterMode_Up;
@@ -164,13 +164,13 @@ void Encoder_Init(void)//инициализация таймера дола
 	    counter =0x80008000;
 	    counter2=0x80008000;
 
-	    TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
+	  //  TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
 	    TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 	    TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
 	    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
 
 	  //  delay(1000);
-	    TIM_Cmd(TIM1, ENABLE);
+	   // TIM_Cmd(TIM1, ENABLE);
 	  //  delay(1000);
 	    TIM_Cmd(TIM3, ENABLE);
 	    Freq_Measure_Init();
@@ -186,7 +186,7 @@ void DOL_Process( void *pvParameters )//процесс обновления ре
 
 
 		channels[0].channel_data=counter+TIM3->CNT;//добавить критическую секцию
-		channels[2].channel_data=counter+TIM1->CNT;
+		//channels[2].channel_data=counter+TIM1->CNT;
 
 		if(period_overload>=20000)
 		{

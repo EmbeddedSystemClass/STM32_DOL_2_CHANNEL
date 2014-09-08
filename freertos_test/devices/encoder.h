@@ -14,5 +14,7 @@
 #include "queue.h"
 #include "semphr.h"
 
+#define ENC_INT_PERIOD 4
+
 void Encoder_Init(void);//инициализация таймера дола
 #endif
