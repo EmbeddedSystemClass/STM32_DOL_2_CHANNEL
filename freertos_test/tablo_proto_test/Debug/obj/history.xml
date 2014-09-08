@@ -30,8 +30,8 @@
       <target file="stm32f4xx_iwdg.o" lastModified="14835c9eab7">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_iwdg.c" lastModified="14835c96d0b"/>
       </target>
-      <target file="proto.o" lastModified="1483a6d339a">
-         <source file="..\..\..\protocols\proto.c" lastModified="1483a6cd666"/>
+      <target file="proto.o" lastModified="148541e16d4">
+         <source file="..\..\..\protocols\proto.c" lastModified="148541e04d2"/>
       </target>
       <target file="tasks.o" lastModified="148300372dc">
          <source file="..\..\..\FreeRTOSV7.1.0\Source\tasks.c" lastModified="13e3b1eb910"/>
@@ -81,8 +81,8 @@
       <target file="stm32f4xx_dma.o" lastModified="1483003759b">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="14149976659"/>
       </target>
-      <target file="channels.o" lastModified="148303b46da">
-         <source file="..\..\..\protocols\channels.c" lastModified="148303ac239"/>
+      <target file="channels.o" lastModified="1485433f23a">
+         <source file="..\..\..\protocols\channels.c" lastModified="1485433e99f"/>
       </target>
       <target file="stm32f4xx_syscfg.o" lastModified="14830036947">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="14125d878f6"/>
@@ -90,8 +90,8 @@
       <target file="stm32f4xx_spi.o" lastModified="148300377fd">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="14125d81f8b"/>
       </target>
-      <target file="encoder.o" lastModified="14845c2624c">
-         <source file="..\..\..\devices\encoder.c" lastModified="14845c2584a"/>
+      <target file="encoder.o" lastModified="1485441860e">
+         <source file="..\..\..\devices\encoder.c" lastModified="148543845f4"/>
       </target>
       <target file="main.o" lastModified="1483a6f03e5">
          <source file="..\..\..\main.c" lastModified="1483a6ec41d"/>

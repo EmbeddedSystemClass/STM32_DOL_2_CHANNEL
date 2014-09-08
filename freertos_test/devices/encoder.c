@@ -4,11 +4,10 @@
 extern struct Channel  channels[];//обобщенная структура каналов
 extern struct task_watch task_watches[];
 
-uint32_t counter =0x80008000;
-uint32_t counter2=0x80008000;
-uint32_t period=0;
-uint32_t period_tim=0;
-uint32_t period_overload=0;
+volatile uint32_t counter =0x80008000;
+volatile uint32_t counter2=0x80008000;
+volatile uint32_t period=0;
+volatile uint32_t period_overload=0;
 
 void DOL_Process( void *pvParameters );
 
@@ -19,7 +18,6 @@ void TIM3_IRQHandler(void)
     //TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 
 	TIM3->SR = (uint16_t)~TIM_IT_Update;
-//	period_tim=TIM2->CNT;
     period=period_overload+TIM2->CNT;
     period_overload=0;
     TIM2->CNT=0;
@@ -71,8 +69,6 @@ void delay(uint32_t time)
 		time--;
 	}
 }
-
-
 
 void Freq_Measure_Init(void)
 {
@@ -187,12 +183,15 @@ void DOL_Process( void *pvParameters )//процесс обновления ре
 	while(1)
 	{
 		task_watches[DOL_TASK].task_status=TASK_ACTIVE;
-		channels[0].channel_data=counter+TIM3->CNT;//добавить критическую секцию
 
-		if(period_overload>=100000)
+
+		channels[0].channel_data=counter+TIM3->CNT;//добавить критическую секцию
+		channels[2].channel_data=counter+TIM1->CNT;
+
+		if(period_overload>=20000)
 		{
 			channels[1].channel_data=0;
-			period_overload=100000;
+			period_overload=20000;
 		}
 		else
 		{
@@ -206,6 +205,7 @@ void DOL_Process( void *pvParameters )//процесс обновления ре
 				channels[1].channel_data=(10000<<8)/period;//counter2+TIM1->CNT;
 			}
 		}
+
 		task_watches[DOL_TASK].counter++;
 		vTaskDelay(50);
 	}
