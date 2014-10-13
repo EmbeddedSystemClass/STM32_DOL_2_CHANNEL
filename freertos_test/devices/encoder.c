@@ -7,7 +7,7 @@ extern struct task_watch task_watches[];
 #define MEASURE_TIM_PERIOD	10000
 
 volatile uint32_t counter =0x80008000;
-volatile uint32_t period=0;
+//volatile uint32_t period=0;
 volatile uint32_t period_overload=0;
 
 
@@ -26,7 +26,7 @@ void DOL_Process( void *pvParameters );
 void TIM3_IRQHandler(void)
 {
 	TIM3->SR = (uint16_t)~TIM_IT_Update;
-    period=period_overload+TIM2->CNT;
+//    period=period_overload+TIM2->CNT;
     p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
     p_queue.counter++;
     p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
@@ -160,9 +160,9 @@ void DOL_Process( void *pvParameters )//
 		    	sum_period+=p_queue.period[i];
 		    }
 
-			sum_period=sum_period/PERIOD_QUEUE_LENGTH;
+			//sum_period=sum_period/PERIOD_QUEUE_LENGTH;
 
-			uint32_t freq=((MEASURE_TIM_PERIOD)<<8)/sum_period;
+			uint32_t freq=(((MEASURE_TIM_PERIOD)<<8)*PERIOD_QUEUE_LENGTH)/sum_period;
 			if(freq>=0xFFFF)
 			{
 				channels[1].channel_data=0xFFFF;
