@@ -61,6 +61,7 @@ sym_8_to_float;
 
 xSemaphoreHandle xProtoSemaphore;
 extern struct task_watch task_watches[];
+extern volatile uint32_t dol_counter_overflow;
 
 #define RS_485_RECEIVE  USART_RS485_GPIO->BSRRH|=USART_RS485_DE; USART_RS485_GPIO->BSRRH|=USART_RS485_RE;
 #define RS_485_TRANSMIT USART_RS485_GPIO->BSRRL|=USART_RS485_DE; USART_RS485_GPIO->BSRRL|=USART_RS485_RE;
@@ -462,7 +463,9 @@ uint8_t Channel_All_Get_Data(void) //
 					      {
 								  case CHNL_DOL_ENC:
 								  {
-								          TransferBuf[index+7]=(uint8_t)((channels[i].channel_data)&0x000000FF); //
+									      channels[0].channel_data=dol_counter_overflow+TIM3->CNT;
+
+									  	  TransferBuf[index+7]=(uint8_t)((channels[i].channel_data)&0x000000FF); //
 								          index++;
 
 										  TransferBuf[index+7]=(uint8_t)(((channels[i].channel_data)&0x0000FF00)>>8);

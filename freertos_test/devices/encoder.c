@@ -1,10 +1,10 @@
 #include "encoder.h"
 #include "channels.h"
 #include "watchdog.h"
-extern struct Channel  channels[];//обобщенная структура каналов
+extern struct Channel  channels[];//
 extern struct task_watch task_watches[];
 
-volatile uint32_t counter =0x80008000;
+volatile uint32_t dol_counter_overflow =0x80008000;
 volatile uint32_t counter2=0x80008000;
 volatile uint32_t period=0;
 volatile uint32_t period_overload=0;
@@ -18,70 +18,70 @@ void TIM3_IRQHandler(void)
     //TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
 
 	TIM3->SR = (uint16_t)~TIM_IT_Update;
-    period=period_overload+TIM2->CNT;
-    period_overload=0;
-    TIM2->CNT=0;
+//    period=period_overload+TIM2->CNT;
+//    period_overload=0;
+//    TIM2->CNT=0;
 
     if(TIM3->CR1 & TIM_CR1_DIR)
     {
-    	counter-=ENC_INT_PERIOD;// ;
+    	dol_counter_overflow-=ENC_INT_PERIOD;// ;
     }
     else
     {
-    	counter+=ENC_INT_PERIOD;//;
+    	dol_counter_overflow+=ENC_INT_PERIOD;//;
     }
 //  }
 }
 
-void TIM1_UP_TIM10_IRQHandler(void)
-{
-  if (TIM_GetITStatus(TIM1, TIM_IT_Update) != RESET)
-  {
-    TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
+//void TIM1_UP_TIM10_IRQHandler(void)
+//{
+//  if (TIM_GetITStatus(TIM1, TIM_IT_Update) != RESET)
+//  {
+//    TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
+//
+//
+//
+//    if(TIM1->CR1 & TIM_CR1_DIR)
+//    {
+//    	counter2-=ENC_INT_PERIOD;//;
+//    }
+//    else
+//    {
+//    	counter2+=ENC_INT_PERIOD;//;
+//    }
+//  }
+//}
+//
+//void TIM2_IRQHandler(void)
+//{
+//  if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+//  {
+//    //TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
+//	  TIM2->SR = (uint16_t)~TIM_IT_Update;
+//	  period_overload+=10000;
+//  }
+//}
 
-
-
-    if(TIM1->CR1 & TIM_CR1_DIR)
-    {
-    	counter2-=ENC_INT_PERIOD;//;
-    }
-    else
-    {
-    	counter2+=ENC_INT_PERIOD;//;
-    }
-  }
-}
-
-void TIM2_IRQHandler(void)
-{
-  if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
-  {
-    //TIM_ClearITPendingBit(TIM2, TIM_IT_Update);
-	  TIM2->SR = (uint16_t)~TIM_IT_Update;
-	  period_overload+=10000;
-  }
-}
-
-void delay(uint32_t time)
-{
-	while(time)
-	{
-		time--;
-	}
-}
-
-void Freq_Measure_Init(void)
-{
-	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM2EN, ENABLE);
-	  TIM_TimeBaseInitTypeDef timer_base;
-	  TIM_TimeBaseStructInit(&timer_base);
-	  timer_base.TIM_Prescaler = 2400 - 1;
-	  timer_base.TIM_Period = 10000;//500;
-	  TIM_TimeBaseInit(TIM2, &timer_base);
-	  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
-	  NVIC_EnableIRQ(TIM2_IRQn);
-	  TIM_Cmd(TIM2, ENABLE);
-}
+//void delay(uint32_t time)
+//{
+//	while(time)
+//	{
+//		time--;
+//	}
+//}
+//
+//void Freq_Measure_Init(void)
+//{
+//	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM2EN, ENABLE);
+//	  TIM_TimeBaseInitTypeDef timer_base;
+//	  TIM_TimeBaseStructInit(&timer_base);
+//	  timer_base.TIM_Prescaler = 2400 - 1;
+//	  timer_base.TIM_Period = 10000;//500;
+//	  TIM_TimeBaseInit(TIM2, &timer_base);
+//	  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+//	  NVIC_EnableIRQ(TIM2_IRQn);
+//	  TIM_Cmd(TIM2, ENABLE);
+//}
 
 void Encoder_Init(void)//инициализация таймера дола
 {
@@ -128,12 +128,12 @@ void Encoder_Init(void)//инициализация таймера дола
 	    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	    NVIC_Init(&NVIC_InitStructure);
 
-	    NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
-	    NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_TIM10_IRQn;
-	    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 15;
-	    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 13;
-	    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	    NVIC_Init(&NVIC_InitStructure);
+//	    NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
+//	    NVIC_InitStructure.NVIC_IRQChannel = TIM1_UP_TIM10_IRQn;
+//	    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 15;
+//	    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 13;
+//	    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+//	    NVIC_Init(&NVIC_InitStructure);
 
 
 	    //настройка пинов микроконтроллера
@@ -149,64 +149,64 @@ void Encoder_Init(void)//инициализация таймера дола
 	    GPIO_PinAFConfig(GPIOA, GPIO_PinSource6, GPIO_AF_TIM3);
 	    GPIO_PinAFConfig(GPIOA, GPIO_PinSource7, GPIO_AF_TIM3);
 
-	    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_9;
-	    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF;;
-	    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
-	   // GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-	    GPIO_Init(GPIOA, &GPIO_InitStructure);
-
-	    GPIO_PinAFConfig(GPIOA,GPIO_PinSource8,GPIO_AF_TIM1);
-	    GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,GPIO_AF_TIM1);
-	    TIM1->CNT=0;
+//	    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8|GPIO_Pin_9;
+//	    GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_AF;;
+//	    GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+//	   // GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
+//	    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
+//	    GPIO_Init(GPIOA, &GPIO_InitStructure);
+//
+//	    GPIO_PinAFConfig(GPIOA,GPIO_PinSource8,GPIO_AF_TIM1);
+//	    GPIO_PinAFConfig(GPIOA,GPIO_PinSource9,GPIO_AF_TIM1);
+//	    TIM1->CNT=0;
 	    TIM3->CNT=0;
 
-	    counter =0x80008000;
-	    counter2=0x80008000;
+	    dol_counter_overflow =0x80008000;
+//	    counter2=0x80008000;
 
 	  //  TIM_ClearITPendingBit(TIM1, TIM_IT_Update);
 	    TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-	    TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
+//	    TIM_ITConfig(TIM1, TIM_IT_Update, ENABLE);
 	    TIM_ITConfig(TIM3, TIM_IT_Update, ENABLE);
 
 	  //  delay(1000);
 	   // TIM_Cmd(TIM1, ENABLE);
 	  //  delay(1000);
 	    TIM_Cmd(TIM3, ENABLE);
-	    Freq_Measure_Init();
-	    xTaskCreate(DOL_Process,(signed char*)"DOL_PROCESS",128, NULL, tskIDLE_PRIORITY + 1, NULL);
+//	    Freq_Measure_Init();
+//	    xTaskCreate(DOL_Process,(signed char*)"DOL_PROCESS",128, NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
-void DOL_Process( void *pvParameters )//процесс обновления регистра дола-необязательный
-{
-	task_watches[DOL_TASK].task_status=TASK_IDLE;
-	while(1)
-	{
-		task_watches[DOL_TASK].task_status=TASK_ACTIVE;
-
-
-		channels[0].channel_data=counter+TIM3->CNT;//добавить критическую секцию
-		//channels[2].channel_data=counter+TIM1->CNT;
-
-		if(period_overload>=20000)
-		{
-			channels[1].channel_data=0;
-			period_overload=20000;
-		}
-		else
-		{
-			uint32_t freq=(10000<<8)/period;
-			if(freq>=0xFFFF)
-			{
-				channels[1].channel_data=0xFFFF;
-			}
-			else
-			{
-				channels[1].channel_data=(10000<<8)/period;//counter2+TIM1->CNT;
-			}
-		}
-
-		task_watches[DOL_TASK].counter++;
-		vTaskDelay(50);
-	}
-}
+//void DOL_Process( void *pvParameters )//
+//{
+//	task_watches[DOL_TASK].task_status=TASK_IDLE;
+//	while(1)
+//	{
+//		task_watches[DOL_TASK].task_status=TASK_ACTIVE;
+//
+//
+//		channels[0].channel_data=counter+TIM3->CNT;//добавить критическую секцию
+//		//channels[2].channel_data=counter+TIM1->CNT;
+//
+////		if(period_overload>=20000)
+////		{
+////			channels[1].channel_data=0;
+////			period_overload=20000;
+////		}
+////		else
+////		{
+////			uint32_t freq=(10000<<8)/period;
+////			if(freq>=0xFFFF)
+////			{
+////				channels[1].channel_data=0xFFFF;
+////			}
+////			else
+////			{
+////				channels[1].channel_data=(10000<<8)/period;//counter2+TIM1->CNT;
+////			}
+////		}
+//
+//		task_watches[DOL_TASK].counter++;
+//		vTaskDelay(50);
+//	}
+//}

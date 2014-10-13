@@ -9,7 +9,7 @@
 //#include "preferences.h"
 #include "misc.h"
 //---------------------------------------
-#define CHANNEL_NUMBER	2
+#define CHANNEL_NUMBER	1
 //---------------------------------------
 #define CHNL_ADC	0//
 	#define CHNL_ADC_FIX_16	0

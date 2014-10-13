@@ -27,11 +27,11 @@
       <target file="timers.o" lastModified="1483003700e">
          <source file="..\..\..\FreeRTOSV7.1.0\Source\timers.c" lastModified="13e3b1eb910"/>
       </target>
-      <target file="proto.o" lastModified="1485451ecc9">
-         <source file="..\..\..\protocols\proto.c" lastModified="148541e04d2"/>
-      </target>
       <target file="stm32f4xx_iwdg.o" lastModified="14835c9eab7">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_iwdg.c" lastModified="14835c96d0b"/>
+      </target>
+      <target file="proto.o" lastModified="14909244130">
+         <source file="..\..\..\protocols\proto.c" lastModified="149092434cc"/>
       </target>
       <target file="tasks.o" lastModified="148300372dc">
          <source file="..\..\..\FreeRTOSV7.1.0\Source\tasks.c" lastModified="13e3b1eb910"/>
@@ -81,8 +81,8 @@
       <target file="stm32f4xx_dma.o" lastModified="1483003759b">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="14149976659"/>
       </target>
-      <target file="channels.o" lastModified="1485451eecd">
-         <source file="..\..\..\protocols\channels.c" lastModified="1485451de81"/>
+      <target file="channels.o" lastModified="14908fdf51c">
+         <source file="..\..\..\protocols\channels.c" lastModified="14908f9e977"/>
       </target>
       <target file="stm32f4xx_syscfg.o" lastModified="14830036947">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_syscfg.c" lastModified="14125d878f6"/>
@@ -90,10 +90,10 @@
       <target file="stm32f4xx_spi.o" lastModified="148300377fd">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="14125d81f8b"/>
       </target>
-      <target file="encoder.o" lastModified="1485451ee5f">
-         <source file="..\..\..\devices\encoder.c" lastModified="14854518c3a"/>
+      <target file="encoder.o" lastModified="14909249d5a">
+         <source file="..\..\..\devices\encoder.c" lastModified="149092489d2"/>
       </target>
-      <target file="main.o" lastModified="1485451eda4">
+      <target file="main.o" lastModified="14908fdf422">
          <source file="..\..\..\main.c" lastModified="1483a6ec41d"/>
       </target>
       <target file="system_stm32f4xx.o" lastModified="14830037463">
