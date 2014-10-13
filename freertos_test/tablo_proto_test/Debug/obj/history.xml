@@ -15,8 +15,8 @@
       <target file="misc.o" lastModified="14835c38294">
          <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="14835c29268"/>
       </target>
-      <target file="watchdog.o" lastModified="14835b64cae">
-         <source file="..\..\..\devices\watchdog.c" lastModified="14835b64413"/>
+      <target file="watchdog.o" lastModified="1490930c971">
+         <source file="..\..\..\devices\watchdog.c" lastModified="1490930c356"/>
       </target>
       <target file="queue.o" lastModified="14830037657">
          <source file="..\..\..\FreeRTOSV7.1.0\Source\queue.c" lastModified="13e3b1eb900"/>

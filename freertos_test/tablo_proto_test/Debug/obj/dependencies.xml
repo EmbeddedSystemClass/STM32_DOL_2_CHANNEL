@@ -303,7 +303,7 @@
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\FreeRTOS.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\task.h"/>
       </source>
-      <source file="..\..\..\devices\watchdog.c" lastModified="14835b64413">
+      <source file="..\..\..\devices\watchdog.c" lastModified="1490930c356">
          <include file="..\..\..\devices\watchdog.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_iwdg.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\FreeRTOS.h"/>
@@ -391,6 +391,11 @@
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\task.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\timers.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\StackMacros.h"/>
+      </source>
+      <source file="..\..\..\devices\encoder.c" lastModified="149092489d2">
+         <include file="..\..\..\devices\encoder.h"/>
+         <include file="..\..\..\protocols\channels.h"/>
+         <include file="..\..\..\devices\watchdog.h"/>
       </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="14835b06da1">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
