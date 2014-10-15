@@ -6,6 +6,7 @@ extern struct task_watch task_watches[];
 
 #define MEASURE_TIM_PERIOD		10000
 #define ONE_SECOND_TIMEPERIOD	10000
+#define	MAX_PERIOD				40
 
 volatile uint32_t counter =0x80008000;
 volatile uint32_t fast_freq_counter=0;
@@ -34,7 +35,7 @@ void TIM3_IRQHandler(void)
 
     period_overload=0;
 
-    fast_freq_counter++;
+//    fast_freq_counter++;
     TIM2->CNT=0;
 
     if(TIM3->CR1 & TIM_CR1_DIR)
@@ -70,22 +71,22 @@ void Freq_Measure_Init(void)
 	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM2EN, ENABLE);
 
 	  TIM_TimeBaseStructInit(&timer_base);
-	  timer_base.TIM_Prescaler = 2400 - 1;
+	  timer_base.TIM_Prescaler = 240 - 1;
 	  timer_base.TIM_Period = MEASURE_TIM_PERIOD;
 	  TIM_TimeBaseInit(TIM2, &timer_base);
 	  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 	  NVIC_EnableIRQ(TIM2_IRQn);
 	  TIM_Cmd(TIM2, ENABLE);
 
-	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM4EN, ENABLE);
-
-	  TIM_TimeBaseStructInit(&timer_base);
-	  timer_base.TIM_Prescaler = 2400 - 1;
-	  timer_base.TIM_Period = ONE_SECOND_TIMEPERIOD;
-	  TIM_TimeBaseInit(TIM4, &timer_base);
-	  TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
-	  NVIC_EnableIRQ(TIM4_IRQn);
-	  TIM_Cmd(TIM4, ENABLE);
+//	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM4EN, ENABLE);
+//
+//	  TIM_TimeBaseStructInit(&timer_base);
+//	  timer_base.TIM_Prescaler = 2400 - 1;
+//	  timer_base.TIM_Period = ONE_SECOND_TIMEPERIOD;
+//	  TIM_TimeBaseInit(TIM4, &timer_base);
+//	  TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
+//	  NVIC_EnableIRQ(TIM4_IRQn);
+//	  TIM_Cmd(TIM4, ENABLE);
 }
 
 void Encoder_Init(void)
@@ -168,10 +169,11 @@ void DOL_Process( void *pvParameters )//
 
 		channels[0].channel_data=counter+TIM3->CNT;//
 
-		if(period_overload>=(MEASURE_TIM_PERIOD*2))
+		if(period_overload>=(MEASURE_TIM_PERIOD*MAX_PERIOD))
 		{
 			channels[1].channel_data=0;
-			period_overload=MEASURE_TIM_PERIOD*2;
+			channels[2].channel_data=0;
+			period_overload=MEASURE_TIM_PERIOD*MAX_PERIOD;
 		}
 		else
 		{
@@ -184,7 +186,8 @@ void DOL_Process( void *pvParameters )//
 
 			//sum_period=sum_period/PERIOD_QUEUE_LENGTH;
 
-			uint32_t freq=(((MEASURE_TIM_PERIOD)<<8)*PERIOD_QUEUE_LENGTH)/sum_period;
+			uint32_t freq=(((MEASURE_TIM_PERIOD*10)<<8)*PERIOD_QUEUE_LENGTH)/sum_period;
+			uint32_t freq_div_10=freq/10;
 			if(freq>=0xFFFF)
 			{
 				channels[1].channel_data=0xFFFF;
@@ -192,6 +195,17 @@ void DOL_Process( void *pvParameters )//
 			else
 			{
 				channels[1].channel_data=freq;//((MEASURE_TIM_PERIOD)<<8)/period;
+			}
+
+
+			//uint32_t freq_div_10=freq/10;//(((MEASURE_TIM_PERIOD*10)<<8)*PERIOD_QUEUE_LENGTH)/sum_period;
+			if(freq_div_10>=0xFFFF)
+			{
+				channels[2].channel_data=0xFFFF;
+			}
+			else
+			{
+				channels[2].channel_data=freq_div_10;//((MEASURE_TIM_PERIOD)<<8)/period;
 			}
 		}
 
