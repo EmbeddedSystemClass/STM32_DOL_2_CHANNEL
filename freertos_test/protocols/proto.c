@@ -487,7 +487,18 @@ uint8_t Channel_All_Get_Data(void) //
 				 {
 					  switch(channels[i].settings.set.modific)
 					  {
-							  case 1:
+							  case CHNL_FREQ_COUNT_T:
+							  {
+									  TransferBuf[index+7]=(uint8_t)((channels[i].channel_data)&0x000000FF); //
+									  index++;
+									  TransferBuf[index+7]=(uint8_t)(((channels[i].channel_data)&0x0000FF00)>>8);
+									  index++;
+									  TransferBuf[index+7]=(uint8_t)channels[i].settings.set.state_byte_1;	 //
+									  index++;
+							  }
+							  break;
+
+					  	  	  case CHNL_FREQ_256:
 							  {
 									  TransferBuf[index+7]=(uint8_t)((channels[i].channel_data)&0x000000FF); //
 									  index++;

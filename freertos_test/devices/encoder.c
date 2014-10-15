@@ -4,10 +4,11 @@
 extern struct Channel  channels[];
 extern struct task_watch task_watches[];
 
-#define MEASURE_TIM_PERIOD	10000
+#define MEASURE_TIM_PERIOD		10000
+#define ONE_SECOND_TIMEPERIOD	10000
 
 volatile uint32_t counter =0x80008000;
-//volatile uint32_t period=0;
+volatile uint32_t fast_freq_counter=0;
 volatile uint32_t period_overload=0;
 
 
@@ -32,6 +33,8 @@ void TIM3_IRQHandler(void)
     p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
 
     period_overload=0;
+
+    fast_freq_counter++;
     TIM2->CNT=0;
 
     if(TIM3->CR1 & TIM_CR1_DIR)
@@ -46,17 +49,26 @@ void TIM3_IRQHandler(void)
 
 void TIM2_IRQHandler(void)
 {
-  if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
-  {
+ // if (TIM_GetITStatus(TIM2, TIM_IT_Update) != RESET)
+ // {
 	  TIM2->SR = (uint16_t)~TIM_IT_Update;
 	  period_overload+=MEASURE_TIM_PERIOD;
-  }
+ // }
+}
+
+void TIM4_IRQHandler(void)
+{
+	TIM4->SR = (uint16_t)~TIM_IT_Update;
+	channels[2].channel_data=fast_freq_counter;
+	fast_freq_counter=0;
 }
 
 void Freq_Measure_Init(void)
 {
-	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM2EN, ENABLE);
 	  TIM_TimeBaseInitTypeDef timer_base;
+
+	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM2EN, ENABLE);
+
 	  TIM_TimeBaseStructInit(&timer_base);
 	  timer_base.TIM_Prescaler = 2400 - 1;
 	  timer_base.TIM_Period = MEASURE_TIM_PERIOD;
@@ -64,6 +76,16 @@ void Freq_Measure_Init(void)
 	  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 	  NVIC_EnableIRQ(TIM2_IRQn);
 	  TIM_Cmd(TIM2, ENABLE);
+
+	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM4EN, ENABLE);
+
+	  TIM_TimeBaseStructInit(&timer_base);
+	  timer_base.TIM_Prescaler = 2400 - 1;
+	  timer_base.TIM_Period = ONE_SECOND_TIMEPERIOD;
+	  TIM_TimeBaseInit(TIM4, &timer_base);
+	  TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
+	  NVIC_EnableIRQ(TIM4_IRQn);
+	  TIM_Cmd(TIM4, ENABLE);
 }
 
 void Encoder_Init(void)

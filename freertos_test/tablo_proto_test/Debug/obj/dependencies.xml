@@ -252,7 +252,7 @@
       <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="14835c29268">
          <include file="..\..\..\cmsis_lib\include\misc.h"/>
       </source>
-      <source file="..\..\..\protocols\proto.c" lastModified="1490945c3fc">
+      <source file="..\..\..\protocols\proto.c" lastModified="1490e665542">
          <include file="..\..\..\protocols\proto.h"/>
          <include file="..\..\..\protocols\channels.h"/>
          <include file="..\..\..\protocols\tablo_parser.h"/>
@@ -456,7 +456,7 @@
       <source file="..\..\..\devices\buzzer.h" lastModified="14293ce3ba6">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
-      <source file="..\..\..\protocols\channels.h" lastModified="1490945c3fc">
+      <source file="..\..\..\protocols\channels.h" lastModified="1490e66a4f8">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
@@ -473,7 +473,7 @@
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\queue.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\timers.h"/>
       </source>
-      <source file="..\..\..\protocols\channels.c" lastModified="1490945c3fc">
+      <source file="..\..\..\protocols\channels.c" lastModified="1490e5f0455">
          <include file="..\..\..\protocols\channels.h"/>
       </source>
       <source file="..\..\..\devices\tablo.h" lastModified="147440898e2">
