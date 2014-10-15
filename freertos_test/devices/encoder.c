@@ -161,6 +161,8 @@ void Encoder_Init(void)
 
 void DOL_Process( void *pvParameters )//
 {
+	static uint8_t period_overload_flag=0x1;
+	uint8_t i=0;
 	task_watches[DOL_TASK].task_status=TASK_IDLE;
 
 	while(1)
@@ -174,11 +176,33 @@ void DOL_Process( void *pvParameters )//
 			channels[1].channel_data=0;
 			channels[2].channel_data=0;
 			period_overload=MEASURE_TIM_PERIOD*MAX_PERIOD;
+			period_overload_flag=0x1;
+
+
+			for(i=0;i<PERIOD_QUEUE_LENGTH;i++)
+		    {
+		    	p_queue.period[i]=MEASURE_TIM_PERIOD*MAX_PERIOD;
+		    }
+			p_queue.counter=0;
 		}
 		else
 		{
 		    uint32_t sum_period=0;
-		    uint8_t i=0;
+
+		    if(period_overload_flag)
+		    {
+		    	if(p_queue.period[1]==MEASURE_TIM_PERIOD*MAX_PERIOD)
+		    	{
+		    		continue;
+		    	}
+
+				for(i=0;i<PERIOD_QUEUE_LENGTH;i++)
+			    {
+			    	p_queue.period[i]=p_queue.period[(p_queue.counter-1)&(PERIOD_QUEUE_LENGTH-1)];
+			    }
+		    	period_overload_flag=0x0;
+		    }
+
 			for(i=0;i<PERIOD_QUEUE_LENGTH;i++)
 		    {
 		    	sum_period+=p_queue.period[i];

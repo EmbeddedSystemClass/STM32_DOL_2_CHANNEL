@@ -90,8 +90,8 @@
       <target file="stm32f4xx_spi.o" lastModified="148300377fd">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_spi.c" lastModified="14125d81f8b"/>
       </target>
-      <target file="encoder.o" lastModified="14913bc3c66">
-         <source file="..\..\..\devices\encoder.c" lastModified="14913bc1cf7"/>
+      <target file="encoder.o" lastModified="149140f35ac">
+         <source file="..\..\..\devices\encoder.c" lastModified="149140f2b4c"/>
       </target>
       <target file="main.o" lastModified="149094721e6">
          <source file="..\..\..\main.c" lastModified="1483a6ec41d"/>
