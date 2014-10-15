@@ -19,7 +19,7 @@
  extern struct Channel  channels[];
 
 //-----------------------------------------------------------------------------------
-uint8_t   DEV_NAME[DEVICE_NAME_LENGTH_SYM] ="<<DOL>>";
+uint8_t   DEV_NAME[DEVICE_NAME_LENGTH_SYM] ="<<ROTOR>>";
 uint8_t   NOTICE[DEVICE_DESC_MAX_LENGTH_SYM]="<-- GEOSPHERA_2014 -->";
 uint8_t   VERSION[DEVICE_VER_LENGTH_SYM] ="\x30\x30\x30\x30\x31";
 
