@@ -87,6 +87,7 @@
     <File name="FreeRTOSV7.1.0/Source/croutine.c" path="FreeRTOSV7.1.0/Source/croutine.c" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_gpio.c" path="cmsis_lib/source/stm32f4xx_gpio.c" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_usart.c" path="cmsis_lib/source/stm32f4xx_usart.c" type="1"/>
+    <File name="devices/address_dev.c" path="devices/address_dev.c" type="1"/>
     <File name="FreeRTOSV7.1.0/Source/portable/ARM_CM4F" path="" type="2"/>
     <File name="FreeRTOSV7.1.0/Source/readme.txt" path="FreeRTOSV7.1.0/Source/readme.txt" type="1"/>
     <File name="cmsis_boot" path="" type="2"/>
@@ -97,8 +98,8 @@
     <File name="FreeRTOSV7.1.0/License" path="" type="2"/>
     <File name="cmsis_boot/startup" path="" type="2"/>
     <File name="cmsis_boot/stm32f4xx.h" path="cmsis_boot/stm32f4xx.h" type="1"/>
-    <File name="FreeRTOSV7.1.0/Source/include/portable.h" path="FreeRTOSV7.1.0/Source/include/portable.h" type="1"/>
     <File name="cmsis/core_cm4_simd.h" path="cmsis/core_cm4_simd.h" type="1"/>
+    <File name="FreeRTOSV7.1.0/Source/include/portable.h" path="FreeRTOSV7.1.0/Source/include/portable.h" type="1"/>
     <File name="cmsis/core_cmFunc.h" path="cmsis/core_cmFunc.h" type="1"/>
     <File name="cmsis/core_cm4.h" path="cmsis/core_cm4.h" type="1"/>
     <File name="devices/encoder.h" path="devices/encoder.h" type="1"/>
@@ -107,8 +108,8 @@
     <File name="FreeRTOSV7.1.0/Source/portable/MemMang/heap_1.c" path="FreeRTOSV7.1.0/Source/portable/MemMang/heap_1.c" type="1"/>
     <File name="devices" path="" type="2"/>
     <File name="cmsis_lib/source/misc.c" path="cmsis_lib/source/misc.c" type="1"/>
-    <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_iwdg.c" path="cmsis_lib/source/stm32f4xx_iwdg.c" type="1"/>
+    <File name="cmsis_lib/include/stm32f4xx_tim.h" path="cmsis_lib/include/stm32f4xx_tim.h" type="1"/>
     <File name="syscalls/syscalls.c" path="syscalls/syscalls.c" type="1"/>
     <File name="devices/watchdog.h" path="devices/watchdog.h" type="1"/>
     <File name="cmsis/core_cm3.c" path="cmsis/core_cm3.c" type="1"/>
@@ -127,6 +128,7 @@
     <File name="cmsis_lib/source/stm32f4xx_syscfg.c" path="cmsis_lib/source/stm32f4xx_syscfg.c" type="1"/>
     <File name="devices/power_detector.c" path="devices/power_detector.c" type="1"/>
     <File name="cmsis_lib/include/stm32f4xx_pwr.h" path="cmsis_lib/include/stm32f4xx_pwr.h" type="1"/>
+    <File name="devices/address_dev.h" path="devices/address_dev.h" type="1"/>
     <File name="FreeRTOSV7.1.0/Source/include/list.h" path="FreeRTOSV7.1.0/Source/include/list.h" type="1"/>
     <File name="FreeRTOSV7.1.0" path="" type="2"/>
     <File name="cmsis_boot/startup/startup_stm32f4xx.c" path="cmsis_boot/startup/startup_stm32f4xx.c" type="1"/>

@@ -1,7 +1,7 @@
 #include "proto.h"
 #include "channels.h"
-#include "tablo_parser.h"
 #include "watchdog.h"
+#include "address_dev.h"
 
 
 #include "stm32f4xx_gpio.h"
@@ -272,6 +272,8 @@ void Proto_Init(uint8_t init_type) //
 
 		RCC_APB1PeriphClockCmd(RCC_USART_RS485, ENABLE);
 		RCC_AHB1PeriphClockCmd(RCC_USART_RS485_GPIO, ENABLE);
+
+		ADRESS_DEV=Address_Dev_Init();
 
 		GPIO_InitStruct.GPIO_Pin = USART_RS485_TXD | USART_RS485_RXD; // Pins  (TX) and (RX) are used
 		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF; 			// the pins are configured as alternate function so the USART peripheral has access to them
