@@ -28,14 +28,13 @@ void DOL_Process( void *pvParameters );
 void TIM3_IRQHandler(void)
 {
 	TIM3->SR = (uint16_t)~TIM_IT_Update;
-//    period=period_overload+TIM2->CNT;
     p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
     p_queue.counter++;
     p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
 
     period_overload=0;
 
-//    fast_freq_counter++;
+
     TIM2->CNT=0;
 
     if(TIM3->CR1 & TIM_CR1_DIR)
@@ -74,19 +73,20 @@ void Freq_Measure_Init(void)
 	  timer_base.TIM_Prescaler = 240 - 1;
 	  timer_base.TIM_Period = MEASURE_TIM_PERIOD;
 	  TIM_TimeBaseInit(TIM2, &timer_base);
+
+	NVIC_InitTypeDef NVIC_InitStructure;
+
+	NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
+	NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 12;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 14;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+
 	  TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
 	  NVIC_EnableIRQ(TIM2_IRQn);
 	  TIM_Cmd(TIM2, ENABLE);
 
-//	  RCC_APB1PeriphClockCmd(RCC_APB1ENR_TIM4EN, ENABLE);
-//
-//	  TIM_TimeBaseStructInit(&timer_base);
-//	  timer_base.TIM_Prescaler = 2400 - 1;
-//	  timer_base.TIM_Period = ONE_SECOND_TIMEPERIOD;
-//	  TIM_TimeBaseInit(TIM4, &timer_base);
-//	  TIM_ITConfig(TIM4, TIM_IT_Update, ENABLE);
-//	  NVIC_EnableIRQ(TIM4_IRQn);
-//	  TIM_Cmd(TIM4, ENABLE);
 }
 
 void Encoder_Init(void)
@@ -121,7 +121,7 @@ void Encoder_Init(void)
 
 	    NVIC_PriorityGroupConfig( NVIC_PriorityGroup_4 );
 	    NVIC_InitStructure.NVIC_IRQChannel = TIM3_IRQn;
-	    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 14;
+	    NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 13;
 	    NVIC_InitStructure.NVIC_IRQChannelSubPriority = 14;
 	    NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	    NVIC_Init(&NVIC_InitStructure);
@@ -209,9 +209,19 @@ void DOL_Process( void *pvParameters )//
 		    }
 
 			//sum_period=sum_period/PERIOD_QUEUE_LENGTH;
-
+			uint32_t freq_div_10=0;
 			uint32_t freq=(((MEASURE_TIM_PERIOD*10)<<8)*PERIOD_QUEUE_LENGTH)/sum_period;
-			uint32_t freq_div_10=freq/10;
+
+
+			if(freq%10<5)
+			{
+				 freq_div_10=freq/10;
+			}
+			else
+			{
+				 freq_div_10=(freq/10)+1;
+			}
+
 			if(freq>=0xFFFF)
 			{
 				channels[1].channel_data=0xFFFF;

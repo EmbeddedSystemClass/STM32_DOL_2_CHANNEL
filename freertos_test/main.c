@@ -25,6 +25,12 @@
 
 int main(void)
 {
+//	uint32_t loop=0xFFFFFF;
+//	while(loop)
+//	{
+//		loop--;
+//	}
+
 	SystemInit();
 	Power_Detector_Init();
 	Watchdog_Init();
