@@ -27,11 +27,11 @@
       <target file="timers.o" lastModified="1483003700e">
          <source file="..\..\..\FreeRTOSV7.1.0\Source\timers.c" lastModified="13e3b1eb910"/>
       </target>
-      <target file="proto.o" lastModified="1491dd2c2ce">
-         <source file="..\..\..\protocols\proto.c" lastModified="1491dd2b57f"/>
-      </target>
       <target file="stm32f4xx_iwdg.o" lastModified="14835c9eab7">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_iwdg.c" lastModified="14835c96d0b"/>
+      </target>
+      <target file="proto.o" lastModified="1491dd2c2ce">
+         <source file="..\..\..\protocols\proto.c" lastModified="1491dd2b57f"/>
       </target>
       <target file="tasks.o" lastModified="148300372dc">
          <source file="..\..\..\FreeRTOSV7.1.0\Source\tasks.c" lastModified="13e3b1eb910"/>
@@ -75,8 +75,8 @@
       <target file="core_cm3.o" lastModified="148300369f3">
          <source file="..\..\..\cmsis\core_cm3.c" lastModified="13f614ce4cf"/>
       </target>
-      <target file="power_detector.o" lastModified="14830037cee">
-         <source file="..\..\..\devices\power_detector.c" lastModified="142a337107a"/>
+      <target file="power_detector.o" lastModified="1492d8a6373">
+         <source file="..\..\..\devices\power_detector.c" lastModified="1492d8a4b76"/>
       </target>
       <target file="stm32f4xx_dma.o" lastModified="1483003759b">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_dma.c" lastModified="14149976659"/>

@@ -31,7 +31,7 @@ void Power_Detector_Init(void)
 	  EXTI_InitStructure.EXTI_LineCmd = ENABLE;
 	  EXTI_Init(&EXTI_InitStructure);
 	    // Configure the PVD Level to 2.2V
-	  PWR_PVDLevelConfig(PWR_PVDLevel_5);
+	  PWR_PVDLevelConfig(PWR_PVDLevel_0);
 	    // Enable the PVD Output
 	  PWR_PVDCmd(ENABLE);
 }
