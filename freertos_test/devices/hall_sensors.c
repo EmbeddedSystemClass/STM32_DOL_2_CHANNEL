@@ -15,6 +15,10 @@
 
 #include "hall_sensors.h"
 
+#include "channels.h"
+#include "watchdog.h"
+extern struct Channel  channels[];
+
 
 #define HALL_SENSORS_PORT    		GPIOC
 #define HALL_SENSORS_PORT_RCC 		RCC_AHB1Periph_GPIOC
@@ -30,6 +34,7 @@
 #define HALL_SENSOR_2_PinSource 	GPIO_PinSource2
 #define HALL_SENSOR_3_PinSource 	GPIO_PinSource3
 
+void Hall_Process( void *pvParameters );
 
 void Hall_Sensors_Init(void)
 {
@@ -107,6 +112,8 @@ void Hall_Sensors_Init(void)
 	NVIC_EnableIRQ(EXTI1_IRQn);
 	NVIC_EnableIRQ(EXTI2_IRQn);
 	NVIC_EnableIRQ(EXTI3_IRQn);
+
+	xTaskCreate(Hall_Process,(signed char*)"HALL_PROCESS",128, NULL, tskIDLE_PRIORITY + 1, NULL);
 }
 
 enum
@@ -117,131 +124,169 @@ enum
 	HALL_SENSOR_3,
 };
 
-static volatile uint8_t last_sensor=0xFF;
+enum
+{
+	HALL_STATE_0=0x3,
+	HALL_STATE_1=0x2,
+	HALL_STATE_2=0x0,
+	HALL_STATE_3=0x1,
+};
+
+enum
+{
+	RIGHT=0,
+	LEFT=1,
+};
+
+#define IDR_MASK	0xF
+
+static volatile uint8_t last_sensor=0xFF,direction=RIGHT,sensors_state=0;
+
+static volatile uint32_t counter=0x80008000;
 
 void EXTI0_IRQHandler(void)
 {
 		EXTI->PR = EXTI_Line0;
-		switch(last_sensor)
+
+		sensors_state=((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))&0x3;
+		switch(sensors_state)
 		{
-		 	 case HALL_SENSOR_0:
+		 	 case HALL_STATE_0:
 		 	 {
-
+		 		counter--;
 		 	 }
 		 	 break;
 
-		 	 case HALL_SENSOR_1:
+		 	 case HALL_STATE_1:
 		 	 {
-
+		 		 counter++;
 		 	 }
 		 	 break;
 
-		 	 case HALL_SENSOR_3:
+		 	 case HALL_STATE_2:
 		 	 {
-
+		 		 counter--;
 		 	 }
 		 	 break;
 
-		 	 default:
+		 	 case HALL_STATE_3:
 		 	 {
-
+		 		counter++;
 		 	 }
+		 	 break;
 		}
-		last_sensor=HALL_SENSOR_0;
 }
 
 void EXTI1_IRQHandler(void)
 {
         EXTI->PR = EXTI_Line1;
 
-		switch(last_sensor)
+		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>1)&0x3;
+		switch(sensors_state)
 		{
-		 	 case HALL_SENSOR_1:
+		 	 case HALL_STATE_0:
 		 	 {
-
+		 		counter--;
 		 	 }
 		 	 break;
 
-		 	 case HALL_SENSOR_0:
+		 	 case HALL_STATE_1:
 		 	 {
-
+		 		 counter++;
 		 	 }
 		 	 break;
 
-		 	 case HALL_SENSOR_2:
+		 	 case HALL_STATE_2:
 		 	 {
-
+		 		 counter--;
 		 	 }
 		 	 break;
 
-		 	 default:
+		 	 case HALL_STATE_3:
 		 	 {
-
+		 		counter++;
 		 	 }
+		 	 break;
 		}
-		last_sensor=HALL_SENSOR_1;
 }
 
 void EXTI2_IRQHandler(void)
 {
         EXTI->PR = EXTI_Line2;
 
-		switch(last_sensor)
+		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>2)&0x3;
+		switch(sensors_state)
 		{
-		 	 case HALL_SENSOR_2:
+		 	 case HALL_STATE_0:
 		 	 {
-
+		 		counter--;
 		 	 }
 		 	 break;
 
-		 	 case HALL_SENSOR_1:
+		 	 case HALL_STATE_1:
 		 	 {
-
+		 		 counter++;
 		 	 }
 		 	 break;
 
-		 	 case HALL_SENSOR_3:
+		 	 case HALL_STATE_2:
 		 	 {
-
+		 		 counter--;
 		 	 }
 		 	 break;
 
-		 	 default:
+		 	 case HALL_STATE_3:
 		 	 {
-
+		 		counter++;
 		 	 }
+		 	 break;
 		}
-		last_sensor=HALL_SENSOR_2;
 }
 
 void EXTI3_IRQHandler(void)
 {
         EXTI->PR = EXTI_Line3;
 
-		switch(last_sensor)
+		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>2)&0x3;
+		switch(sensors_state)
 		{
-		 	 case HALL_SENSOR_3:
+		 	 case HALL_STATE_1:
 		 	 {
-
+		 		counter--;
 		 	 }
 		 	 break;
 
-		 	 case HALL_SENSOR_0:
+		 	 case HALL_STATE_2:
 		 	 {
-
+		 		 counter++;
 		 	 }
 		 	 break;
 
-		 	 case HALL_SENSOR_2:
+		 	 case HALL_STATE_3:
 		 	 {
-
+		 		 counter--;
 		 	 }
 		 	 break;
 
-		 	 default:
+		 	 case HALL_STATE_0:
 		 	 {
-
+		 		counter++;
 		 	 }
+		 	 break;
 		}
-		last_sensor=HALL_SENSOR_3;
+}
+
+void Hall_Process( void *pvParameters )//
+{
+//	task_watches[DOL_TASK].task_status=TASK_IDLE;
+
+	while(1)
+	{
+//		task_watches[DOL_TASK].task_status=TASK_ACTIVE;
+
+		channels[0].channel_data=counter;//
+
+//		task_watches[DOL_TASK].counter++;
+		vTaskDelay(50);
+	}
 }

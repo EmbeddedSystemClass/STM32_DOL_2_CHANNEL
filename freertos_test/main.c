@@ -25,17 +25,11 @@
 
 int main(void)
 {
-//	uint32_t loop=0xFFFFFF;
-//	while(loop)
-//	{
-//		loop--;
-//	}
-
 	SystemInit();
 //	Power_Detector_Init();
 //	Watchdog_Init();
 	Hall_Sensors_Init();
-//	Proto_Init(PROTO_FIRST_INIT);
+	Proto_Init(PROTO_FIRST_INIT);
     vTaskStartScheduler();
 
     while(1);
