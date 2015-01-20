@@ -88,6 +88,7 @@
     <File name="cmsis_lib/source/stm32f4xx_gpio.c" path="cmsis_lib/source/stm32f4xx_gpio.c" type="1"/>
     <File name="cmsis_lib/source/stm32f4xx_usart.c" path="cmsis_lib/source/stm32f4xx_usart.c" type="1"/>
     <File name="devices/address_dev.c" path="devices/address_dev.c" type="1"/>
+    <File name="devices/hall_sensors.c" path="devices/hall_sensors.c" type="1"/>
     <File name="FreeRTOSV7.1.0/Source/portable/ARM_CM4F" path="" type="2"/>
     <File name="FreeRTOSV7.1.0/Source/readme.txt" path="FreeRTOSV7.1.0/Source/readme.txt" type="1"/>
     <File name="cmsis_boot" path="" type="2"/>
@@ -119,6 +120,7 @@
     <File name="protocols/preferences.h" path="protocols/preferences.h" type="1"/>
     <File name="FreeRTOSV7.1.0/Source/portable/ARM_CM4F/port.c" path="FreeRTOSV7.1.0/Source/portable/GCC/ARM_CM4F/port.c" type="1"/>
     <File name="FreeRTOSV7.1.0/Source/include/timers.h" path="FreeRTOSV7.1.0/Source/include/timers.h" type="1"/>
+    <File name="devices/hall_sensors.h" path="devices/hall_sensors.h" type="1"/>
     <File name="protocols/channels.c" path="protocols/channels.c" type="1"/>
     <File name="cmsis_boot/stm32f4xx_conf.h" path="cmsis_boot/stm32f4xx_conf.h" type="1"/>
     <File name="cmsis_boot/system_stm32f4xx.h" path="cmsis_boot/system_stm32f4xx.h" type="1"/>

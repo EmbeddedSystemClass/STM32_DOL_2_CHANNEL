@@ -21,7 +21,7 @@
 #include "watchdog.h"
 
 #include "power_detector.h"
-#include "encoder.h"
+#include "hall_sensors.h"
 
 int main(void)
 {
@@ -32,10 +32,10 @@ int main(void)
 //	}
 
 	SystemInit();
-	Power_Detector_Init();
-	Watchdog_Init();
-	Encoder_Init();
-	Proto_Init(PROTO_FIRST_INIT);
+//	Power_Detector_Init();
+//	Watchdog_Init();
+	Hall_Sensors_Init();
+//	Proto_Init(PROTO_FIRST_INIT);
     vTaskStartScheduler();
 
     while(1);

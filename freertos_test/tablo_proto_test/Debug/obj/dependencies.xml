@@ -226,11 +226,11 @@
       <source file="..\..\..\cmsis_lib\include\misc.h" lastModified="14125d86b69">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
+      <source file="..\..\..\cmsis\core_cm3.c" lastModified="13f614ce8b7">
+      </source>
       <source file="..\..\..\cmsis_lib\source\stm32f4xx_tim.c" lastModified="1483603f646">
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
-      </source>
-      <source file="..\..\..\cmsis\core_cm3.c" lastModified="13f614ce8b7">
       </source>
       <source file="..\..\..\devices\power_detector.h" lastModified="142a2da7b4e">
       </source>
@@ -248,6 +248,8 @@
       <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="14835c29268">
          <include file="..\..\..\cmsis_lib\include\misc.h"/>
       </source>
+      <source file="..\..\..\devices\hall_sensors.h" lastModified="14b06711783">
+      </source>
       <source file="..\..\..\protocols\proto.c" lastModified="1491dd2b57f">
          <include file="..\..\..\protocols\proto.h"/>
          <include file="..\..\..\protocols\channels.h"/>
@@ -262,6 +264,20 @@
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\task.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\queue.h"/>
          <include file="..\..\..\FreeRTOSV7.1.0\Source\include\semphr.h"/>
+      </source>
+      <source file="..\..\..\devices\hall_sensors.c" lastModified="14b067f25e6">
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_tim.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_exti.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_syscfg.h"/>
+         <include file="..\..\..\cmsis_lib\include\misc.h"/>
+         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\FreeRTOS.h"/>
+         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\task.h"/>
+         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\queue.h"/>
+         <include file="..\..\..\FreeRTOSV7.1.0\Source\include\semphr.h"/>
+         <include file="..\..\..\devices\hall_sensors.h"/>
       </source>
       <source file="..\..\..\cmsis_boot\stm32f4xx.h" lastModified="1414ea875f5">
          <include file="..\..\..\cmsis\core_cm4.h"/>
@@ -435,7 +451,7 @@
       </source>
       <source file="..\..\..\FreeRTOSV7.1.0\Source\include\projdefs.h" lastModified="13e3b1eb8f0">
       </source>
-      <source file="..\..\..\main.c" lastModified="1491ce99775">
+      <source file="..\..\..\main.c" lastModified="14b068a4e39">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_gpio.h"/>
          <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
@@ -449,7 +465,7 @@
          <include file="..\..\..\protocols\proto.h"/>
          <include file="..\..\..\devices\watchdog.h"/>
          <include file="..\..\..\devices\power_detector.h"/>
-         <include file="..\..\..\devices\encoder.h"/>
+         <include file="..\..\..\devices\hall_sensors.h"/>
       </source>
       <source file="..\..\..\devices\buzzer.h" lastModified="14293ce3ba6">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
