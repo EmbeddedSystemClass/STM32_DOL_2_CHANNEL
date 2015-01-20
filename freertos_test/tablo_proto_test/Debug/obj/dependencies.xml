@@ -234,6 +234,14 @@
       </source>
       <source file="..\..\..\devices\power_detector.h" lastModified="142a2da7b4e">
       </source>
+      <source file="..\..\..\devices\power_detector.c" lastModified="1492d8a4b76">
+         <include file="..\..\..\devices\power_detector.h"/>
+         <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_rcc.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_pwr.h"/>
+         <include file="..\..\..\cmsis_lib\include\stm32f4xx_exti.h"/>
+         <include file="..\..\..\cmsis_lib\include\misc.h"/>
+      </source>
       <source file="..\..\..\protocols\proto.h" lastModified="1475790b64d">
          <include file="..\..\..\cmsis_boot\stm32f4xx.h"/>
       </source>
