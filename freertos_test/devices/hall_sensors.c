@@ -54,7 +54,7 @@ void Hall_Sensors_Init(void)
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_Init(HALL_SENSORS_PORT, &GPIO_InitStructure);
 
-	GPIO_InitStructure.GPIO_Pin = ENC_0_PIN|ENC_1_PIN;
+	GPIO_InitStructure.GPIO_Pin = ENC_0_PIN|ENC_1_PIN|GPIO_Pin_10;
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_Init(ENC_PORT, &GPIO_InitStructure);
@@ -196,26 +196,46 @@ void EXTI0_IRQHandler(void)
 {
 		EXTI->PR = EXTI_Line0;
 
-	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-	    p_queue.counter++;
-	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-
-	    period_overload=0;
-
-	    TIM2->CNT=0;
+//	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+//	    p_queue.counter++;
+//	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+//
+//	    period_overload=0;
+//
+//	    TIM2->CNT=0;
 
 		sensors_state=((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))&0x3;
 		switch(sensors_state)
 		{
 		 	 case HALL_STATE_0:
 		 	 {
-		 		counter--;
+		 		 counter--;
+
+		 	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+		 	    p_queue.counter++;
+		 	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+
+		 	    period_overload=0;
+
+		 	    TIM2->CNT=0;
+
+		 	    ENC_PORT->ODR^=GPIO_Pin_10;
 		 	 }
 		 	 break;
 
 		 	 case HALL_STATE_1:
 		 	 {
 		 		 counter++;
+
+		 	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+		 	    p_queue.counter++;
+		 	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+
+		 	    period_overload=0;
+
+		 	    TIM2->CNT=0;
+
+		 	    ENC_PORT->ODR^=GPIO_Pin_10;
 		 	 }
 		 	 break;
 
@@ -267,13 +287,13 @@ void EXTI1_IRQHandler(void)
 {
         EXTI->PR = EXTI_Line1;
 
-	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-	    p_queue.counter++;
-	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-
-	    period_overload=0;
-
-	    TIM2->CNT=0;
+//	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+//	    p_queue.counter++;
+//	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+//
+//	    period_overload=0;
+//
+//	    TIM2->CNT=0;
 
 		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>1)&0x3;
 		switch(sensors_state)
@@ -338,13 +358,13 @@ void EXTI2_IRQHandler(void)
 {
         EXTI->PR = EXTI_Line2;
 
-	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-	    p_queue.counter++;
-	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-
-	    period_overload=0;
-
-	    TIM2->CNT=0;
+//	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+//	    p_queue.counter++;
+//	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+//
+//	    period_overload=0;
+//
+//	    TIM2->CNT=0;
 
 		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>2)&0x3;
 		switch(sensors_state)
@@ -409,12 +429,13 @@ void EXTI3_IRQHandler(void)
 {
         EXTI->PR = EXTI_Line3;
 
-	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-	    p_queue.counter++;
-	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-
-	    period_overload=0;
-
+//	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+//	    p_queue.counter++;
+//	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+//
+//	    period_overload=0;
+//
+//	    TIM2->CNT=0;
 
 		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>2)&0x3;
 		switch(sensors_state)
@@ -475,6 +496,22 @@ void EXTI3_IRQHandler(void)
 		}
 }
 
+#define SWAP(A, B) { uint32_t t = A; A = B; B = t; }
+
+void bubblesort(uint32_t *a, uint32_t n)
+{
+  uint16_t i, j;
+
+  for (i = n - 1; i > 0; i--)
+  {
+    for (j = 0; j < i; j++)
+    {
+      if (a[j] > a[j + 1])
+        SWAP( a[j], a[j + 1] );
+    }
+  }
+}
+
 void Hall_Process( void *pvParameters )//
 {
 //	task_watches[DOL_TASK].task_status=TASK_IDLE;
@@ -524,10 +561,18 @@ void Hall_Process( void *pvParameters )//
 				    	sum_period+=p_queue.period[i];
 				    }
 
-					//sum_period=sum_period/PERIOD_QUEUE_LENGTH;
+//				    uint32_t temp_mas[PERIOD_QUEUE_LENGTH];
+//
+//					for(i=0;i<PERIOD_QUEUE_LENGTH;i++)
+//					{
+//						temp_mas[i]=p_queue.period[i];
+//					}
+					//bubblesort(temp_mas,PERIOD_QUEUE_LENGTH);
+
+
 					uint32_t freq_div_10=0;
 					uint32_t freq=(((MEASURE_TIM_PERIOD*10)<<8)*PERIOD_QUEUE_LENGTH)/sum_period;
-
+					//uint32_t freq=(((MEASURE_TIM_PERIOD*10)<<8))/temp_mas[PERIOD_QUEUE_LENGTH>>1];
 
 					if(freq%10<5)
 					{
@@ -560,6 +605,6 @@ void Hall_Process( void *pvParameters )//
 		}
 
 //		task_watches[DOL_TASK].counter++;
-		vTaskDelay(50);
+		vTaskDelay(200);
 	}
 }
