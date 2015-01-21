@@ -248,7 +248,7 @@
       <source file="..\..\..\cmsis_lib\source\misc.c" lastModified="14835c29268">
          <include file="..\..\..\cmsis_lib\include\misc.h"/>
       </source>
-      <source file="..\..\..\devices\hall_sensors.h" lastModified="14b06711783">
+      <source file="..\..\..\devices\hall_sensors.h" lastModified="14b0b3b98fc">
       </source>
       <source file="..\..\..\protocols\proto.c" lastModified="1491dd2b57f">
          <include file="..\..\..\protocols\proto.h"/>
