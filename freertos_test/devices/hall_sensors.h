@@ -13,19 +13,19 @@ enum
 #define IDR_MASK	0xF
 #define ENC_MASK 	0x3
 
-#define HALL_SENSORS_PORT    		GPIOC
-#define HALL_SENSORS_PORT_RCC 		RCC_AHB1Periph_GPIOC
-#define HALL_SENSORS_PORT_EXTI 		EXTI_PortSourceGPIOC
+#define HALL_SENSORS_PORT    		GPIOA
+#define HALL_SENSORS_PORT_RCC 		RCC_AHB1Periph_GPIOA
+#define HALL_SENSORS_PORT_EXTI 		EXTI_PortSourceGPIOA
 
-#define HALL_SENSOR_0_PIN 			GPIO_Pin_0
-#define HALL_SENSOR_1_PIN 			GPIO_Pin_1
-#define HALL_SENSOR_2_PIN 			GPIO_Pin_2
-#define HALL_SENSOR_3_PIN 			GPIO_Pin_3
+#define HALL_SENSOR_0_PIN 			GPIO_Pin_6
+#define HALL_SENSOR_1_PIN 			GPIO_Pin_7
+#define HALL_SENSOR_2_PIN 			GPIO_Pin_8
+#define HALL_SENSOR_3_PIN 			GPIO_Pin_9
 
-#define HALL_SENSOR_0_PinSource 	GPIO_PinSource0
-#define HALL_SENSOR_1_PinSource 	GPIO_PinSource1
-#define HALL_SENSOR_2_PinSource 	GPIO_PinSource2
-#define HALL_SENSOR_3_PinSource 	GPIO_PinSource3
+#define HALL_SENSOR_0_PinSource 	GPIO_PinSource6
+#define HALL_SENSOR_1_PinSource 	GPIO_PinSource7
+#define HALL_SENSOR_2_PinSource 	GPIO_PinSource8
+#define HALL_SENSOR_3_PinSource 	GPIO_PinSource9
 
 #define ENC_PORT    		GPIOC
 #define ENC_PORT_RCC 		RCC_AHB1Periph_GPIOC

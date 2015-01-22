@@ -42,8 +42,8 @@
       <target file="stm32f4xx_gpio.o" lastModified="14835b0c055">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="14835b06da1"/>
       </target>
-      <target file="hall_sensors.o" lastModified="14b0bbb8a86">
-         <source file="..\..\..\devices\hall_sensors.c" lastModified="14b0bbb80c2"/>
+      <target file="hall_sensors.o" lastModified="14b112d84ec">
+         <source file="..\..\..\devices\hall_sensors.c" lastModified="14b112d782b"/>
       </target>
       <target file="stm32f4xx_usart.o" lastModified="149183b7700">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="149183b5cb1"/>
@@ -99,8 +99,8 @@
       <target file="encoder.o" lastModified="1491cecab6c">
          <source file="..\..\..\devices\encoder.c" lastModified="1491cec97a6"/>
       </target>
-      <target file="main.o" lastModified="14b0b3ba7d1">
-         <source file="..\..\..\main.c" lastModified="14b06d99fe3"/>
+      <target file="main.o" lastModified="14b10d4c35e">
+         <source file="..\..\..\main.c" lastModified="14b10bd21fd"/>
       </target>
       <target file="system_stm32f4xx.o" lastModified="14830037463">
          <source file="..\..\..\cmsis_boot\system_stm32f4xx.c" lastModified="1428e3c1104"/>

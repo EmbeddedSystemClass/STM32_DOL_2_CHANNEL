@@ -6,7 +6,6 @@
 #include "stm32f4xx_syscfg.h"
 #include <misc.h>
 
-//Инклуды от FreeRTOS:
 
 #include "FreeRTOS.h"
 #include "task.h"
@@ -54,7 +53,7 @@ void Hall_Sensors_Init(void)
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL;
 	GPIO_Init(HALL_SENSORS_PORT, &GPIO_InitStructure);
 
-	GPIO_InitStructure.GPIO_Pin = ENC_0_PIN|ENC_1_PIN|GPIO_Pin_10;
+	GPIO_InitStructure.GPIO_Pin = ENC_0_PIN|ENC_1_PIN|GPIO_Pin_10|GPIO_Pin_8|GPIO_Pin_9;
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_Init(ENC_PORT, &GPIO_InitStructure);
@@ -62,28 +61,28 @@ void Hall_Sensors_Init(void)
 	EXTI_InitTypeDef EXTI_InitStructure;
 
 	SYSCFG_EXTILineConfig(HALL_SENSORS_PORT_EXTI, HALL_SENSOR_0_PinSource);
-	EXTI_InitStructure.EXTI_Line = EXTI_Line0;
+	EXTI_InitStructure.EXTI_Line = EXTI_Line6;
 	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
 	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
 	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
 	EXTI_Init(&EXTI_InitStructure);
 
 	SYSCFG_EXTILineConfig(HALL_SENSORS_PORT_EXTI, HALL_SENSOR_1_PinSource);
-	EXTI_InitStructure.EXTI_Line = EXTI_Line1;
+	EXTI_InitStructure.EXTI_Line = EXTI_Line7;
 	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
 	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
 	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
 	EXTI_Init(&EXTI_InitStructure);
 
 	SYSCFG_EXTILineConfig(HALL_SENSORS_PORT_EXTI, HALL_SENSOR_2_PinSource);
-	EXTI_InitStructure.EXTI_Line = EXTI_Line2;
+	EXTI_InitStructure.EXTI_Line = EXTI_Line8;
 	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
 	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
 	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
 	EXTI_Init(&EXTI_InitStructure);
 
 	SYSCFG_EXTILineConfig(HALL_SENSORS_PORT_EXTI, HALL_SENSOR_3_PinSource);
-	EXTI_InitStructure.EXTI_Line = EXTI_Line3;
+	EXTI_InitStructure.EXTI_Line = EXTI_Line9;
 	EXTI_InitStructure.EXTI_Mode = EXTI_Mode_Interrupt;
 	EXTI_InitStructure.EXTI_Trigger = EXTI_Trigger_Rising_Falling;
 	EXTI_InitStructure.EXTI_LineCmd = ENABLE;
@@ -94,36 +93,38 @@ void Hall_Sensors_Init(void)
 
 	NVIC_InitTypeDef NVIC_InitStructure;
 
-	NVIC_InitStructure.NVIC_IRQChannel = EXTI0_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannel =  EXTI9_5_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 7;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_Init(&NVIC_InitStructure);
 
-	NVIC_InitStructure.NVIC_IRQChannel = EXTI1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 7;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-
-	NVIC_InitStructure.NVIC_IRQChannel = EXTI2_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 7;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
-
-	NVIC_InitStructure.NVIC_IRQChannel = EXTI3_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 7;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
+//	NVIC_InitStructure.NVIC_IRQChannel = EXTI1_IRQn;
+//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 7;
+//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
+//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+//	NVIC_Init(&NVIC_InitStructure);
+//
+//	NVIC_InitStructure.NVIC_IRQChannel = EXTI2_IRQn;
+//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 7;
+//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
+//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+//	NVIC_Init(&NVIC_InitStructure);
+//
+//	NVIC_InitStructure.NVIC_IRQChannel = EXTI3_IRQn;
+//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 7;
+//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
+//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+//	NVIC_Init(&NVIC_InitStructure);
 
 	Freq_Measure_Init();
 
-	NVIC_EnableIRQ(EXTI0_IRQn);
-	NVIC_EnableIRQ(EXTI1_IRQn);
-	NVIC_EnableIRQ(EXTI2_IRQn);
-	NVIC_EnableIRQ(EXTI3_IRQn);
+	ENC_PORT->BSRRH=GPIO_Pin_10|GPIO_Pin_9|GPIO_Pin_8;
+
+	NVIC_EnableIRQ( EXTI9_5_IRQn);
+//	NVIC_EnableIRQ(EXTI1_IRQn);
+//	NVIC_EnableIRQ(EXTI2_IRQn);
+//	NVIC_EnableIRQ(EXTI3_IRQn);
 
 	switch(counter&ENC_MASK)
 	{
@@ -192,325 +193,621 @@ void Freq_Measure_Init(void)
 
 }
 
-void EXTI0_IRQHandler(void)
+
+void EXTI9_5_IRQHandler(void)
 {
-		EXTI->PR = EXTI_Line0;
-
-//	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-//	    p_queue.counter++;
-//	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-//
-//	    period_overload=0;
-//
-//	    TIM2->CNT=0;
-
-		sensors_state=((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))&0x3;
-		switch(sensors_state)
-		{
-		 	 case HALL_STATE_0:
-		 	 {
-		 		 counter--;
-
-		 	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-		 	    p_queue.counter++;
-		 	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-
-		 	    period_overload=0;
-
-		 	    TIM2->CNT=0;
-
-		 	    ENC_PORT->ODR^=GPIO_Pin_10;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_1:
-		 	 {
-		 		 counter++;
-
-		 	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-		 	    p_queue.counter++;
-		 	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-
-		 	    period_overload=0;
-
-		 	    TIM2->CNT=0;
-
-		 	    ENC_PORT->ODR^=GPIO_Pin_10;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_2:
-		 	 {
-		 		 counter--;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_3:
-		 	 {
-		 		counter++;
-		 	 }
-		 	 break;
-		}
-
-		switch(counter&ENC_MASK)
-		{
-			case 0x0:
-			{
-				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
-			}
-			break;
-
-			case 0x1:
-			{
-				ENC_PORT->BSRRH=ENC_0_PIN;
-				ENC_PORT->BSRRL=ENC_1_PIN;
-			}
-			break;
-
-			case 0x2:
-			{
-				ENC_PORT->BSRRL=ENC_0_PIN;
-				ENC_PORT->BSRRL=ENC_1_PIN;
-			}
-			break;
-
-			case 0x3:
-			{
-				ENC_PORT->BSRRL=ENC_0_PIN;
-				ENC_PORT->BSRRH=ENC_1_PIN;
-			}
-			break;
-		}
-}
-
-void EXTI1_IRQHandler(void)
-{
-        EXTI->PR = EXTI_Line1;
-
-//	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-//	    p_queue.counter++;
-//	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-//
-//	    period_overload=0;
-//
-//	    TIM2->CNT=0;
-
-		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>1)&0x3;
-		switch(sensors_state)
-		{
-		 	 case HALL_STATE_0:
-		 	 {
-		 		counter--;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_1:
-		 	 {
-		 		 counter++;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_2:
-		 	 {
-		 		 counter--;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_3:
-		 	 {
-		 		counter++;
-		 	 }
-		 	 break;
-		}
-
-		switch(counter&ENC_MASK)
-		{
-			case 0x0:
-			{
-				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
-			}
-			break;
-
-			case 0x1:
-			{
-				ENC_PORT->BSRRH=ENC_0_PIN;
-				ENC_PORT->BSRRL=ENC_1_PIN;
-			}
-			break;
-
-			case 0x2:
-			{
-				ENC_PORT->BSRRL=ENC_0_PIN;
-				ENC_PORT->BSRRL=ENC_1_PIN;
-			}
-			break;
-
-			case 0x3:
-			{
-				ENC_PORT->BSRRL=ENC_0_PIN;
-				ENC_PORT->BSRRH=ENC_1_PIN;
-			}
-			break;
-		}
-}
-
-void EXTI2_IRQHandler(void)
-{
-        EXTI->PR = EXTI_Line2;
-
-//	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-//	    p_queue.counter++;
-//	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-//
-//	    period_overload=0;
-//
-//	    TIM2->CNT=0;
-
-		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>2)&0x3;
-		switch(sensors_state)
-		{
-		 	 case HALL_STATE_0:
-		 	 {
-		 		counter--;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_1:
-		 	 {
-		 		 counter++;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_2:
-		 	 {
-		 		 counter--;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_3:
-		 	 {
-		 		counter++;
-		 	 }
-		 	 break;
-		}
-
-		switch(counter&ENC_MASK)
-		{
-			case 0x0:
-			{
-				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
-			}
-			break;
-
-			case 0x1:
-			{
-				ENC_PORT->BSRRH=ENC_0_PIN;
-				ENC_PORT->BSRRL=ENC_1_PIN;
-			}
-			break;
-
-			case 0x2:
-			{
-				ENC_PORT->BSRRL=ENC_0_PIN;
-				ENC_PORT->BSRRL=ENC_1_PIN;
-			}
-			break;
-
-			case 0x3:
-			{
-				ENC_PORT->BSRRL=ENC_0_PIN;
-				ENC_PORT->BSRRH=ENC_1_PIN;
-			}
-			break;
-		}
-}
-
-void EXTI3_IRQHandler(void)
-{
-        EXTI->PR = EXTI_Line3;
-
-//	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
-//	    p_queue.counter++;
-//	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
-//
-//	    period_overload=0;
-//
-//	    TIM2->CNT=0;
-
-		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>2)&0x3;
-		switch(sensors_state)
-		{
-		 	 case HALL_STATE_1:
-		 	 {
-		 		counter--;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_2:
-		 	 {
-		 		 counter++;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_3:
-		 	 {
-		 		 counter--;
-		 	 }
-		 	 break;
-
-		 	 case HALL_STATE_0:
-		 	 {
-		 		counter++;
-		 	 }
-		 	 break;
-		}
-
-		switch(counter&ENC_MASK)
-		{
-			case 0x0:
-			{
-				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
-			}
-			break;
-
-			case 0x1:
-			{
-				ENC_PORT->BSRRH=ENC_0_PIN;
-				ENC_PORT->BSRRL=ENC_1_PIN;
-			}
-			break;
-
-			case 0x2:
-			{
-				ENC_PORT->BSRRL=ENC_0_PIN;
-				ENC_PORT->BSRRL=ENC_1_PIN;
-			}
-			break;
-
-			case 0x3:
-			{
-				ENC_PORT->BSRRL=ENC_0_PIN;
-				ENC_PORT->BSRRH=ENC_1_PIN;
-			}
-			break;
-		}
-}
-
-#define SWAP(A, B) { uint32_t t = A; A = B; B = t; }
-
-void bubblesort(uint32_t *a, uint32_t n)
-{
-  uint16_t i, j;
-
-  for (i = n - 1; i > 0; i--)
+  if((EXTI->PR & EXTI_Line6) != (uint32_t)RESET)
   {
-    for (j = 0; j < i; j++)
-    {
-      if (a[j] > a[j + 1])
-        SWAP( a[j], a[j + 1] );
-    }
+	  EXTI->PR = EXTI_Line6;
+
+    sensors_state=((uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK))&0x3;
+    		switch(sensors_state)
+    		{
+    		 	 case HALL_STATE_0:
+    		 	 {
+    		 		 counter--;
+
+    		 	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+    		 	    p_queue.counter++;
+    		 	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+
+    		 	    period_overload=0;
+
+    		 	    TIM2->CNT=0;
+
+    		 	   // ENC_PORT->ODR^=GPIO_Pin_10;
+    		 	 }
+    		 	 break;
+
+    		 	 case HALL_STATE_1:
+    		 	 {
+    		 		 counter++;
+
+    		 	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+    		 	    p_queue.counter++;
+    		 	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+
+    		 	    period_overload=0;
+
+    		 	    TIM2->CNT=0;
+
+    		 	    //ENC_PORT->ODR^=GPIO_Pin_10;
+    		 	 }
+    		 	 break;
+
+    		 	 case HALL_STATE_2:
+    		 	 {
+    		 		 counter--;
+    		 		//ENC_PORT->ODR^=GPIO_Pin_10;
+    		 	 }
+    		 	 break;
+
+    		 	 case HALL_STATE_3:
+    		 	 {
+    		 		counter++;
+    		 		//ENC_PORT->ODR^=GPIO_Pin_10;
+    		 	 }
+    		 	 break;
+    		}
+
+    		switch(counter&ENC_MASK)
+    		{
+    			case 0x0:
+    			{
+    				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+    			}
+    			break;
+
+    			case 0x1:
+    			{
+    				ENC_PORT->BSRRH=ENC_0_PIN;
+    				ENC_PORT->BSRRL=ENC_1_PIN;
+    			}
+    			break;
+
+    			case 0x2:
+    			{
+    				ENC_PORT->BSRRL=ENC_0_PIN;
+    				ENC_PORT->BSRRL=ENC_1_PIN;
+    			}
+    			break;
+
+    			case 0x3:
+    			{
+    				ENC_PORT->BSRRL=ENC_0_PIN;
+    				ENC_PORT->BSRRH=ENC_1_PIN;
+    			}
+    			break;
+    		}
   }
+
+  if((EXTI->PR & EXTI_Line7) != (uint32_t)RESET)
+  {
+	  EXTI->PR = EXTI_Line7;
+
+
+	sensors_state=(((uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK))>>1)&0x3;
+	switch(sensors_state)
+	{
+	 	 case HALL_STATE_0:
+	 	 {
+	 		counter--;
+	 		ENC_PORT->ODR^=GPIO_Pin_8;
+	 	 }
+	 	 break;
+
+	 	 case HALL_STATE_1:
+	 	 {
+	 		 counter++;
+	 		ENC_PORT->ODR^=GPIO_Pin_8;
+	 	 }
+	 	 break;
+
+	 	 case HALL_STATE_2:
+	 	 {
+	 		 counter--;
+	 		ENC_PORT->ODR^=GPIO_Pin_8;
+	 	 }
+	 	 break;
+
+	 	 case HALL_STATE_3:
+	 	 {
+	 		counter++;
+	 		ENC_PORT->ODR^=GPIO_Pin_8;
+	 	 }
+	 	 break;
+	}
+
+	switch(counter&ENC_MASK)
+	{
+		case 0x0:
+		{
+			ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+		}
+		break;
+
+		case 0x1:
+		{
+			ENC_PORT->BSRRH=ENC_0_PIN;
+			ENC_PORT->BSRRL=ENC_1_PIN;
+		}
+		break;
+
+		case 0x2:
+		{
+			ENC_PORT->BSRRL=ENC_0_PIN;
+			ENC_PORT->BSRRL=ENC_1_PIN;
+		}
+		break;
+
+		case 0x3:
+		{
+			ENC_PORT->BSRRL=ENC_0_PIN;
+			ENC_PORT->BSRRH=ENC_1_PIN;
+		}
+		break;
+	}
+  }
+
+  if((EXTI->PR & EXTI_Line8) != (uint32_t)RESET)
+  {
+	  EXTI->PR = EXTI_Line8;
+
+
+	sensors_state=(((uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK))>>2)&0x3;
+	switch(sensors_state)
+	{
+	 	 case HALL_STATE_0:
+	 	 {
+	 		counter--;
+	 		ENC_PORT->ODR^=GPIO_Pin_9;
+	 	 }
+	 	 break;
+
+	 	 case HALL_STATE_1:
+	 	 {
+	 		 counter++;
+	 		ENC_PORT->ODR^=GPIO_Pin_9;
+	 	 }
+	 	 break;
+
+	 	 case HALL_STATE_2:
+	 	 {
+	 		 counter--;
+	 		ENC_PORT->ODR^=GPIO_Pin_9;
+	 	 }
+	 	 break;
+
+	 	 case HALL_STATE_3:
+	 	 {
+	 		counter++;
+	 		ENC_PORT->ODR^=GPIO_Pin_9;
+	 	 }
+	 	 break;
+	}
+
+	switch(counter&ENC_MASK)
+	{
+		case 0x0:
+		{
+			ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+		}
+		break;
+
+		case 0x1:
+		{
+			ENC_PORT->BSRRH=ENC_0_PIN;
+			ENC_PORT->BSRRL=ENC_1_PIN;
+		}
+		break;
+
+		case 0x2:
+		{
+			ENC_PORT->BSRRL=ENC_0_PIN;
+			ENC_PORT->BSRRL=ENC_1_PIN;
+		}
+		break;
+
+		case 0x3:
+		{
+			ENC_PORT->BSRRL=ENC_0_PIN;
+			ENC_PORT->BSRRH=ENC_1_PIN;
+		}
+		break;
+	}
+  }
+
+  if((EXTI->PR & EXTI_Line9) != (uint32_t)RESET)
+  {
+	  EXTI->PR = EXTI_Line9;
+
+
+    sensors_state=(((uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK))>>2)&0x3;
+
+	switch(sensors_state)
+	{
+	 	 case HALL_STATE_1:
+	 	 {
+	 		counter--;
+	 		ENC_PORT->ODR^=GPIO_Pin_10;
+	 	 }
+	 	 break;
+
+	 	 case HALL_STATE_2:
+	 	 {
+	 		 counter++;
+	 		ENC_PORT->ODR^=GPIO_Pin_10;
+	 	 }
+	 	 break;
+
+	 	 case HALL_STATE_3:
+	 	 {
+	 		 counter--;
+	 		ENC_PORT->ODR^=GPIO_Pin_10;
+	 	 }
+	 	 break;
+
+	 	 case HALL_STATE_0:
+	 	 {
+	 		counter++;
+	 		ENC_PORT->ODR^=GPIO_Pin_10;
+	 	 }
+	 	 break;
+	}
+
+	switch(counter&ENC_MASK)
+	{
+		case 0x0:
+		{
+			ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+		}
+		break;
+
+		case 0x1:
+		{
+			ENC_PORT->BSRRH=ENC_0_PIN;
+			ENC_PORT->BSRRL=ENC_1_PIN;
+		}
+		break;
+
+		case 0x2:
+		{
+			ENC_PORT->BSRRL=ENC_0_PIN;
+			ENC_PORT->BSRRL=ENC_1_PIN;
+		}
+		break;
+
+		case 0x3:
+		{
+			ENC_PORT->BSRRL=ENC_0_PIN;
+			ENC_PORT->BSRRH=ENC_1_PIN;
+		}
+		break;
+	}
+  }
+
 }
+
+
+//void EXTI0_IRQHandler(void)
+//{
+//		EXTI->PR = EXTI_Line0;
+//
+////	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+////	    p_queue.counter++;
+////	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+////
+////	    period_overload=0;
+////
+////	    TIM2->CNT=0;
+//
+//		sensors_state=((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))&0x3;
+//		switch(sensors_state)
+//		{
+//		 	 case HALL_STATE_0:
+//		 	 {
+//		 		 counter--;
+//
+//		 	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+//		 	    p_queue.counter++;
+//		 	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+//
+//		 	    period_overload=0;
+//
+//		 	    TIM2->CNT=0;
+//
+//		 	    ENC_PORT->ODR^=GPIO_Pin_10;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_1:
+//		 	 {
+//		 		 counter++;
+//
+//		 	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+//		 	    p_queue.counter++;
+//		 	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+//
+//		 	    period_overload=0;
+//
+//		 	    TIM2->CNT=0;
+//
+//		 	    ENC_PORT->ODR^=GPIO_Pin_10;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_2:
+//		 	 {
+//		 		 counter--;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_3:
+//		 	 {
+//		 		counter++;
+//		 	 }
+//		 	 break;
+//		}
+//
+//		switch(counter&ENC_MASK)
+//		{
+//			case 0x0:
+//			{
+//				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+//			}
+//			break;
+//
+//			case 0x1:
+//			{
+//				ENC_PORT->BSRRH=ENC_0_PIN;
+//				ENC_PORT->BSRRL=ENC_1_PIN;
+//			}
+//			break;
+//
+//			case 0x2:
+//			{
+//				ENC_PORT->BSRRL=ENC_0_PIN;
+//				ENC_PORT->BSRRL=ENC_1_PIN;
+//			}
+//			break;
+//
+//			case 0x3:
+//			{
+//				ENC_PORT->BSRRL=ENC_0_PIN;
+//				ENC_PORT->BSRRH=ENC_1_PIN;
+//			}
+//			break;
+//		}
+//}
+
+//void EXTI1_IRQHandler(void)
+//{
+//        EXTI->PR = EXTI_Line1;
+//
+////	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+////	    p_queue.counter++;
+////	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+////
+////	    period_overload=0;
+////
+////	    TIM2->CNT=0;
+//
+//		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>1)&0x3;
+//		switch(sensors_state)
+//		{
+//		 	 case HALL_STATE_0:
+//		 	 {
+//		 		counter--;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_1:
+//		 	 {
+//		 		 counter++;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_2:
+//		 	 {
+//		 		 counter--;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_3:
+//		 	 {
+//		 		counter++;
+//		 	 }
+//		 	 break;
+//		}
+//
+//		switch(counter&ENC_MASK)
+//		{
+//			case 0x0:
+//			{
+//				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+//			}
+//			break;
+//
+//			case 0x1:
+//			{
+//				ENC_PORT->BSRRH=ENC_0_PIN;
+//				ENC_PORT->BSRRL=ENC_1_PIN;
+//			}
+//			break;
+//
+//			case 0x2:
+//			{
+//				ENC_PORT->BSRRL=ENC_0_PIN;
+//				ENC_PORT->BSRRL=ENC_1_PIN;
+//			}
+//			break;
+//
+//			case 0x3:
+//			{
+//				ENC_PORT->BSRRL=ENC_0_PIN;
+//				ENC_PORT->BSRRH=ENC_1_PIN;
+//			}
+//			break;
+//		}
+//}
+
+//void EXTI2_IRQHandler(void)
+//{
+//        EXTI->PR = EXTI_Line2;
+//
+////	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+////	    p_queue.counter++;
+////	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+////
+////	    period_overload=0;
+////
+////	    TIM2->CNT=0;
+//
+//		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>2)&0x3;
+//		switch(sensors_state)
+//		{
+//		 	 case HALL_STATE_0:
+//		 	 {
+//		 		counter--;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_1:
+//		 	 {
+//		 		 counter++;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_2:
+//		 	 {
+//		 		 counter--;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_3:
+//		 	 {
+//		 		counter++;
+//		 	 }
+//		 	 break;
+//		}
+//
+//		switch(counter&ENC_MASK)
+//		{
+//			case 0x0:
+//			{
+//				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+//			}
+//			break;
+//
+//			case 0x1:
+//			{
+//				ENC_PORT->BSRRH=ENC_0_PIN;
+//				ENC_PORT->BSRRL=ENC_1_PIN;
+//			}
+//			break;
+//
+//			case 0x2:
+//			{
+//				ENC_PORT->BSRRL=ENC_0_PIN;
+//				ENC_PORT->BSRRL=ENC_1_PIN;
+//			}
+//			break;
+//
+//			case 0x3:
+//			{
+//				ENC_PORT->BSRRL=ENC_0_PIN;
+//				ENC_PORT->BSRRH=ENC_1_PIN;
+//			}
+//			break;
+//		}
+//}
+
+//void EXTI3_IRQHandler(void)
+//{
+//        EXTI->PR = EXTI_Line3;
+//
+////	    p_queue.period[p_queue.counter]=period_overload+TIM2->CNT;
+////	    p_queue.counter++;
+////	    p_queue.counter&=(PERIOD_QUEUE_LENGTH-1);
+////
+////	    period_overload=0;
+////
+////	    TIM2->CNT=0;
+//
+//		sensors_state=(((uint8_t)(HALL_SENSORS_PORT->IDR&IDR_MASK))>>2)&0x3;
+//		switch(sensors_state)
+//		{
+//		 	 case HALL_STATE_1:
+//		 	 {
+//		 		counter--;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_2:
+//		 	 {
+//		 		 counter++;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_3:
+//		 	 {
+//		 		 counter--;
+//		 	 }
+//		 	 break;
+//
+//		 	 case HALL_STATE_0:
+//		 	 {
+//		 		counter++;
+//		 	 }
+//		 	 break;
+//		}
+//
+//		switch(counter&ENC_MASK)
+//		{
+//			case 0x0:
+//			{
+//				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+//			}
+//			break;
+//
+//			case 0x1:
+//			{
+//				ENC_PORT->BSRRH=ENC_0_PIN;
+//				ENC_PORT->BSRRL=ENC_1_PIN;
+//			}
+//			break;
+//
+//			case 0x2:
+//			{
+//				ENC_PORT->BSRRL=ENC_0_PIN;
+//				ENC_PORT->BSRRL=ENC_1_PIN;
+//			}
+//			break;
+//
+//			case 0x3:
+//			{
+//				ENC_PORT->BSRRL=ENC_0_PIN;
+//				ENC_PORT->BSRRH=ENC_1_PIN;
+//			}
+//			break;
+//		}
+//}
+
+//#define SWAP(A, B) { uint32_t t = A; A = B; B = t; }
+//
+//void bubblesort(uint32_t *a, uint32_t n)
+//{
+//  uint16_t i, j;
+//
+//  for (i = n - 1; i > 0; i--)
+//  {
+//    for (j = 0; j < i; j++)
+//    {
+//      if (a[j] > a[j + 1])
+//        SWAP( a[j], a[j + 1] );
+//    }
+//  }
+//}
 
 void Hall_Process( void *pvParameters )//
 {
