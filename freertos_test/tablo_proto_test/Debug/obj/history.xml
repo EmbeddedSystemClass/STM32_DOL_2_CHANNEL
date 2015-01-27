@@ -42,8 +42,8 @@
       <target file="stm32f4xx_gpio.o" lastModified="14835b0c055">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_gpio.c" lastModified="14835b06da1"/>
       </target>
-      <target file="hall_sensors.o" lastModified="14b112d84ec">
-         <source file="..\..\..\devices\hall_sensors.c" lastModified="14b112d782b"/>
+      <target file="hall_sensors.o" lastModified="14b2b66da92">
+         <source file="..\..\..\devices\hall_sensors.c" lastModified="14b2b66d042"/>
       </target>
       <target file="stm32f4xx_usart.o" lastModified="149183b7700">
          <source file="..\..\..\cmsis_lib\source\stm32f4xx_usart.c" lastModified="149183b5cb1"/>

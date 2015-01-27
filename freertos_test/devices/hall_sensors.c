@@ -18,7 +18,7 @@
 #include "watchdog.h"
 extern struct Channel  channels[];
 
-static volatile uint8_t sensors_state=0;
+static volatile uint8_t sensors_state=0,full_sensor_state=0,last_full_sensor_state=0;
 
 static volatile uint32_t counter=0x80008000;
 volatile uint32_t period_overload=0;
@@ -57,6 +57,14 @@ void Hall_Sensors_Init(void)
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;;
 	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_Init(ENC_PORT, &GPIO_InitStructure);
+
+	//-----------------------------
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);//
+	GPIO_InitStructure.GPIO_Pin = GPIO_Pin_10|GPIO_Pin_11|GPIO_Pin_12|GPIO_Pin_15;
+	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;;
+	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_Init(GPIOA, &GPIO_InitStructure);
+	//-----------------------------
 
 	EXTI_InitTypeDef EXTI_InitStructure;
 
@@ -199,8 +207,14 @@ void EXTI9_5_IRQHandler(void)
   if((EXTI->PR & EXTI_Line6) != (uint32_t)RESET)
   {
 	  EXTI->PR = EXTI_Line6;
+	  GPIOA->ODR^=GPIO_Pin_10;
 
-    sensors_state=((uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK))&0x3;
+	full_sensor_state=(uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK);
+    sensors_state=(full_sensor_state)&0x3;
+
+    if(last_full_sensor_state!=full_sensor_state)
+    {
+    	    last_full_sensor_state=full_sensor_state;
     		switch(sensors_state)
     		{
     		 	 case HALL_STATE_0:
@@ -215,7 +229,7 @@ void EXTI9_5_IRQHandler(void)
 
     		 	    TIM2->CNT=0;
 
-    		 	   // ENC_PORT->ODR^=GPIO_Pin_10;
+    		 	   // GPIOA->ODR^=GPIO_Pin_10;
     		 	 }
     		 	 break;
 
@@ -231,21 +245,21 @@ void EXTI9_5_IRQHandler(void)
 
     		 	    TIM2->CNT=0;
 
-    		 	    //ENC_PORT->ODR^=GPIO_Pin_10;
+    		 	   // GPIOA->ODR^=GPIO_Pin_10;
     		 	 }
     		 	 break;
 
     		 	 case HALL_STATE_2:
     		 	 {
     		 		 counter--;
-    		 		//ENC_PORT->ODR^=GPIO_Pin_10;
+    		 		//GPIOA->ODR^=GPIO_Pin_10;
     		 	 }
     		 	 break;
 
     		 	 case HALL_STATE_3:
     		 	 {
     		 		counter++;
-    		 		//ENC_PORT->ODR^=GPIO_Pin_10;
+    		 		//GPIOA->ODR^=GPIO_Pin_10;
     		 	 }
     		 	 break;
     		}
@@ -279,211 +293,227 @@ void EXTI9_5_IRQHandler(void)
     			}
     			break;
     		}
+     }
   }
+
 
   if((EXTI->PR & EXTI_Line7) != (uint32_t)RESET)
   {
 	  EXTI->PR = EXTI_Line7;
+	  GPIOA->ODR^=GPIO_Pin_11;
 
-
-	sensors_state=(((uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK))>>1)&0x3;
-	switch(sensors_state)
-	{
-	 	 case HALL_STATE_0:
-	 	 {
-	 		counter--;
-	 		ENC_PORT->ODR^=GPIO_Pin_8;
-	 	 }
-	 	 break;
-
-	 	 case HALL_STATE_1:
-	 	 {
-	 		 counter++;
-	 		ENC_PORT->ODR^=GPIO_Pin_8;
-	 	 }
-	 	 break;
-
-	 	 case HALL_STATE_2:
-	 	 {
-	 		 counter--;
-	 		ENC_PORT->ODR^=GPIO_Pin_8;
-	 	 }
-	 	 break;
-
-	 	 case HALL_STATE_3:
-	 	 {
-	 		counter++;
-	 		ENC_PORT->ODR^=GPIO_Pin_8;
-	 	 }
-	 	 break;
-	}
-
-	switch(counter&ENC_MASK)
-	{
-		case 0x0:
+	full_sensor_state=(uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK);
+	sensors_state=((full_sensor_state)>>1)&0x3;
+    if(last_full_sensor_state!=full_sensor_state)
+    {
+    	last_full_sensor_state=full_sensor_state;
+		switch(sensors_state)
 		{
-			ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
-		}
-		break;
+			 case HALL_STATE_0:
+			 {
+				counter--;
+				//GPIOA->ODR^=GPIO_Pin_11;
+			 }
+			 break;
 
-		case 0x1:
-		{
-			ENC_PORT->BSRRH=ENC_0_PIN;
-			ENC_PORT->BSRRL=ENC_1_PIN;
-		}
-		break;
+			 case HALL_STATE_1:
+			 {
+				 counter++;
+				//GPIOA->ODR^=GPIO_Pin_11;
+			 }
+			 break;
 
-		case 0x2:
-		{
-			ENC_PORT->BSRRL=ENC_0_PIN;
-			ENC_PORT->BSRRL=ENC_1_PIN;
-		}
-		break;
+			 case HALL_STATE_2:
+			 {
+				 counter--;
+				//GPIOA->ODR^=GPIO_Pin_11;
+			 }
+			 break;
 
-		case 0x3:
-		{
-			ENC_PORT->BSRRL=ENC_0_PIN;
-			ENC_PORT->BSRRH=ENC_1_PIN;
+			 case HALL_STATE_3:
+			 {
+				counter++;
+				//GPIOA->ODR^=GPIO_Pin_11;
+			 }
+			 break;
 		}
-		break;
-	}
+
+		switch(counter&ENC_MASK)
+		{
+			case 0x0:
+			{
+				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+			}
+			break;
+
+			case 0x1:
+			{
+				ENC_PORT->BSRRH=ENC_0_PIN;
+				ENC_PORT->BSRRL=ENC_1_PIN;
+			}
+			break;
+
+			case 0x2:
+			{
+				ENC_PORT->BSRRL=ENC_0_PIN;
+				ENC_PORT->BSRRL=ENC_1_PIN;
+			}
+			break;
+
+			case 0x3:
+			{
+				ENC_PORT->BSRRL=ENC_0_PIN;
+				ENC_PORT->BSRRH=ENC_1_PIN;
+			}
+			break;
+		}
+     }
   }
 
   if((EXTI->PR & EXTI_Line8) != (uint32_t)RESET)
   {
 	  EXTI->PR = EXTI_Line8;
+	  GPIOA->ODR^=GPIO_Pin_12;
 
-
-	sensors_state=(((uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK))>>2)&0x3;
-	switch(sensors_state)
-	{
-	 	 case HALL_STATE_0:
-	 	 {
-	 		counter--;
-	 		ENC_PORT->ODR^=GPIO_Pin_9;
-	 	 }
-	 	 break;
-
-	 	 case HALL_STATE_1:
-	 	 {
-	 		 counter++;
-	 		ENC_PORT->ODR^=GPIO_Pin_9;
-	 	 }
-	 	 break;
-
-	 	 case HALL_STATE_2:
-	 	 {
-	 		 counter--;
-	 		ENC_PORT->ODR^=GPIO_Pin_9;
-	 	 }
-	 	 break;
-
-	 	 case HALL_STATE_3:
-	 	 {
-	 		counter++;
-	 		ENC_PORT->ODR^=GPIO_Pin_9;
-	 	 }
-	 	 break;
-	}
-
-	switch(counter&ENC_MASK)
-	{
-		case 0x0:
+	full_sensor_state=(uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK);
+	sensors_state=((full_sensor_state)>>2)&0x3;
+    if(last_full_sensor_state!=full_sensor_state)
+    {
+    	last_full_sensor_state=full_sensor_state;
+		switch(sensors_state)
 		{
-			ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
-		}
-		break;
+			 case HALL_STATE_0:
+			 {
+				counter--;
+				//GPIOA->ODR^=GPIO_Pin_12;
+			 }
+			 break;
 
-		case 0x1:
-		{
-			ENC_PORT->BSRRH=ENC_0_PIN;
-			ENC_PORT->BSRRL=ENC_1_PIN;
-		}
-		break;
+			 case HALL_STATE_1:
+			 {
+				 counter++;
+				//GPIOA->ODR^=GPIO_Pin_12;
+			 }
+			 break;
 
-		case 0x2:
-		{
-			ENC_PORT->BSRRL=ENC_0_PIN;
-			ENC_PORT->BSRRL=ENC_1_PIN;
-		}
-		break;
+			 case HALL_STATE_2:
+			 {
+				 counter--;
+				//GPIOA->ODR^=GPIO_Pin_12;
+			 }
+			 break;
 
-		case 0x3:
-		{
-			ENC_PORT->BSRRL=ENC_0_PIN;
-			ENC_PORT->BSRRH=ENC_1_PIN;
+			 case HALL_STATE_3:
+			 {
+				counter++;
+				//GPIOA->ODR^=GPIO_Pin_12;
+			 }
+			 break;
 		}
-		break;
-	}
+
+		switch(counter&ENC_MASK)
+		{
+			case 0x0:
+			{
+				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+			}
+			break;
+
+			case 0x1:
+			{
+				ENC_PORT->BSRRH=ENC_0_PIN;
+				ENC_PORT->BSRRL=ENC_1_PIN;
+			}
+			break;
+
+			case 0x2:
+			{
+				ENC_PORT->BSRRL=ENC_0_PIN;
+				ENC_PORT->BSRRL=ENC_1_PIN;
+			}
+			break;
+
+			case 0x3:
+			{
+				ENC_PORT->BSRRL=ENC_0_PIN;
+				ENC_PORT->BSRRH=ENC_1_PIN;
+			}
+			break;
+		}
+    }
   }
 
   if((EXTI->PR & EXTI_Line9) != (uint32_t)RESET)
   {
 	  EXTI->PR = EXTI_Line9;
+	  GPIOA->ODR^=GPIO_Pin_15;
 
-
-    sensors_state=(((uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK))>>2)&0x3;
-
-	switch(sensors_state)
-	{
-	 	 case HALL_STATE_1:
-	 	 {
-	 		counter--;
-	 		ENC_PORT->ODR^=GPIO_Pin_10;
-	 	 }
-	 	 break;
-
-	 	 case HALL_STATE_2:
-	 	 {
-	 		 counter++;
-	 		ENC_PORT->ODR^=GPIO_Pin_10;
-	 	 }
-	 	 break;
-
-	 	 case HALL_STATE_3:
-	 	 {
-	 		 counter--;
-	 		ENC_PORT->ODR^=GPIO_Pin_10;
-	 	 }
-	 	 break;
-
-	 	 case HALL_STATE_0:
-	 	 {
-	 		counter++;
-	 		ENC_PORT->ODR^=GPIO_Pin_10;
-	 	 }
-	 	 break;
-	}
-
-	switch(counter&ENC_MASK)
-	{
-		case 0x0:
+	full_sensor_state=(uint8_t)((HALL_SENSORS_PORT->IDR>>6)&IDR_MASK);
+    sensors_state=((full_sensor_state)>>2)&0x3;
+    if(last_full_sensor_state!=full_sensor_state)
+    {
+    	last_full_sensor_state=full_sensor_state;
+		switch(sensors_state)
 		{
-			ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
-		}
-		break;
+			 case HALL_STATE_1:
+			 {
+				counter--;
+				//GPIOA->ODR^=GPIO_Pin_15;
+			 }
+			 break;
 
-		case 0x1:
-		{
-			ENC_PORT->BSRRH=ENC_0_PIN;
-			ENC_PORT->BSRRL=ENC_1_PIN;
-		}
-		break;
+			 case HALL_STATE_2:
+			 {
+				 counter++;
+				//GPIOA->ODR^=GPIO_Pin_15;
+			 }
+			 break;
 
-		case 0x2:
-		{
-			ENC_PORT->BSRRL=ENC_0_PIN;
-			ENC_PORT->BSRRL=ENC_1_PIN;
-		}
-		break;
+			 case HALL_STATE_3:
+			 {
+				 counter--;
+				//GPIOA->ODR^=GPIO_Pin_15;
+			 }
+			 break;
 
-		case 0x3:
-		{
-			ENC_PORT->BSRRL=ENC_0_PIN;
-			ENC_PORT->BSRRH=ENC_1_PIN;
+			 case HALL_STATE_0:
+			 {
+				counter++;
+				//GPIOA->ODR^=GPIO_Pin_15;;
+			 }
+			 break;
 		}
-		break;
-	}
+
+		switch(counter&ENC_MASK)
+		{
+			case 0x0:
+			{
+				ENC_PORT->BSRRH=(ENC_0_PIN|ENC_1_PIN);
+			}
+			break;
+
+			case 0x1:
+			{
+				ENC_PORT->BSRRH=ENC_0_PIN;
+				ENC_PORT->BSRRL=ENC_1_PIN;
+			}
+			break;
+
+			case 0x2:
+			{
+				ENC_PORT->BSRRL=ENC_0_PIN;
+				ENC_PORT->BSRRL=ENC_1_PIN;
+			}
+			break;
+
+			case 0x3:
+			{
+				ENC_PORT->BSRRL=ENC_0_PIN;
+				ENC_PORT->BSRRH=ENC_1_PIN;
+			}
+			break;
+		}
+    }
   }
 
 }
