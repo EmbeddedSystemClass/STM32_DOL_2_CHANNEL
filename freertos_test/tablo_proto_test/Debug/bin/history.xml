@@ -1,34 +1,34 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <history>
-   <processor signature="4.7.2 -mcpu=cortex-m4 -mfpu=fpv4-sp-d16 -mfloat-abi=softfp -mthumb -Wall -g -nostartfiles -Map=tablo_proto_test.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\pilorama -TC:\CooCox\CoIDE\configuration\ProgramData\pilorama/link.ld -g">
-      <target file="tablo_proto_test.elf" lastModified="1492d8a65d4">
-         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="14830036947"/>
-         <source file="..\obj\core_cm3.o" lastModified="148300369f3"/>
-         <source file="..\obj\stm32f4xx_usart.o" lastModified="149183b7700"/>
-         <source file="..\obj\stm32f4xx_pwr.o" lastModified="14830036b5a"/>
-         <source file="..\obj\proto.o" lastModified="1491dd2c2ce"/>
-         <source file="..\obj\startup_stm32f4xx.o" lastModified="14830036dbc"/>
-         <source file="..\obj\stm32f4xx_iwdg.o" lastModified="14835c9eab7"/>
-         <source file="..\obj\main.o" lastModified="1491cebd1d5"/>
-         <source file="..\obj\stm32f4xx_rcc.o" lastModified="14835c0c681"/>
-         <source file="..\obj\timers.o" lastModified="1483003700e"/>
-         <source file="..\obj\encoder.o" lastModified="1491cecab6c"/>
-         <source file="..\obj\watchdog.o" lastModified="149094722ff"/>
-         <source file="..\obj\tasks.o" lastModified="148300372dc"/>
-         <source file="..\obj\stm32f4xx_gpio.o" lastModified="14835b0c055"/>
-         <source file="..\obj\list.o" lastModified="148300373e6"/>
-         <source file="..\obj\system_stm32f4xx.o" lastModified="14830037463"/>
-         <source file="..\obj\syscalls.o" lastModified="148300374e0"/>
-         <source file="..\obj\queue.o" lastModified="14830037657"/>
-         <source file="..\obj\port.o" lastModified="148300376b5"/>
-         <source file="..\obj\address_dev.o" lastModified="1491dd2c399"/>
-         <source file="..\obj\croutine.o" lastModified="14830037732"/>
-         <source file="..\obj\channels.o" lastModified="14913a5d3b5"/>
-         <source file="..\obj\stm32f4xx_exti.o" lastModified="148300378f7"/>
-         <source file="..\obj\misc.o" lastModified="14835c38294"/>
-         <source file="..\obj\heap_1.o" lastModified="148300379f1"/>
-         <source file="..\obj\stm32f4xx_tim.o" lastModified="14836043802"/>
-         <source file="..\obj\power_detector.o" lastModified="1492d8a6373"/>
+   <processor signature="4.7.2 -mcpu=cortex-m3 -mthumb -g -nostartfiles -Map=tablo_proto_test.map -O0 --gc-sections -LC:\CooCox\CoIDE\configuration\ProgramData\pilorama -TC:\CooCox\CoIDE\configuration\ProgramData\pilorama/arm-gcc-link.ld -g">
+      <target file="tablo_proto_test.elf" lastModified="1519fe28fce">
+         <source file="..\obj\stm32f4xx_syscfg.o" lastModified="1519fe2738c"/>
+         <source file="..\obj\core_cm3.o" lastModified="1519fe27457"/>
+         <source file="..\obj\stm32f4xx_usart.o" lastModified="1519fe276a9"/>
+         <source file="..\obj\stm32f4xx_pwr.o" lastModified="1519fe277a3"/>
+         <source file="..\obj\proto.o" lastModified="1519fe27987"/>
+         <source file="..\obj\startup_stm32f4xx.o" lastModified="1519fe27a04"/>
+         <source file="..\obj\stm32f4xx_iwdg.o" lastModified="1519fe27ac0"/>
+         <source file="..\obj\main.o" lastModified="1519fe27c18"/>
+         <source file="..\obj\stm32f4xx_rcc.o" lastModified="1519fe27d9e"/>
+         <source file="..\obj\timers.o" lastModified="1519fe27e2b"/>
+         <source file="..\obj\encoder.o" lastModified="1519fe27f25"/>
+         <source file="..\obj\watchdog.o" lastModified="1519fe27fe0"/>
+         <source file="..\obj\tasks.o" lastModified="1519fe28148"/>
+         <source file="..\obj\stm32f4xx_gpio.o" lastModified="1519fe28232"/>
+         <source file="..\obj\list.o" lastModified="1519fe282de"/>
+         <source file="..\obj\system_stm32f4xx.o" lastModified="1519fe283a9"/>
+         <source file="..\obj\syscalls.o" lastModified="1519fe28465"/>
+         <source file="..\obj\port.o" lastModified="1519fe28510"/>
+         <source file="..\obj\queue.o" lastModified="1519fe2861a"/>
+         <source file="..\obj\address_dev.o" lastModified="1519fe286d6"/>
+         <source file="..\obj\croutine.o" lastModified="1519fe28791"/>
+         <source file="..\obj\channels.o" lastModified="1519fe2885c"/>
+         <source file="..\obj\stm32f4xx_exti.o" lastModified="1519fe28927"/>
+         <source file="..\obj\misc.o" lastModified="1519fe28a12"/>
+         <source file="..\obj\heap_1.o" lastModified="1519fe28abe"/>
+         <source file="..\obj\stm32f4xx_tim.o" lastModified="1519fe28cb2"/>
+         <source file="..\obj\power_detector.o" lastModified="1519fe28d6d"/>
       </target>
    </processor>
 </history>
